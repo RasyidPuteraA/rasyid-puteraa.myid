@@ -1,0 +1,482 @@
+﻿[
+    {
+        "id":  "knw-learn-001",
+        "title":  "Learning Note: Systems Thinking Primer",
+        "type":  "note",
+        "category":  "Learning Notes",
+        "summary":  "Practical systems thinking principles for problem decomposition and structured modeling.",
+        "tags":  [
+                     "systems-thinking",
+                     "embedded-systems",
+                     "framework",
+                     "learning"
+                 ],
+        "related_projects":  [
+                                 "prj-eng-001",
+                                 "prj-res-001"
+                             ],
+        "date":  "2025-01-22",
+        "likes":  21,
+        "cover_image":  "assets/img/portfolio/books-2.jpg",
+        "content":  "Practical systems thinking principles for problem decomposition and structured modeling. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-learn-001"
+    },
+    {
+        "id":  "knw-learn-002",
+        "title":  "Learning Note: Execution Discipline",
+        "type":  "note",
+        "category":  "Learning Notes",
+        "summary":  "Execution patterns for planning cadence, review loops, and consistency.",
+        "tags":  [
+                     "execution",
+                     "workflow",
+                     "product-development",
+                     "practice"
+                 ],
+        "related_projects":  [
+                                 "prj-prod-001",
+                                 "prj-web-002"
+                             ],
+        "date":  "2025-02-16",
+        "likes":  14,
+        "cover_image":  "assets/img/portfolio/books-2.jpg",
+        "content":  "Execution patterns for planning cadence, review loops, and consistency. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-learn-002"
+    },
+    {
+        "id":  "knw-tech-001",
+        "title":  "Technical Note: Component Architecture",
+        "type":  "article",
+        "category":  "Technical Notes",
+        "summary":  "Component structuring guidelines for reusable UI and software content blocks.",
+        "tags":  [
+                     "software",
+                     "frontend",
+                     "components",
+                     "structure"
+                 ],
+        "related_projects":  [
+                                 "prj-web-001",
+                                 "prj-prod-002"
+                             ],
+        "date":  "2025-03-02",
+        "likes":  29,
+        "cover_image":  "assets/img/portfolio/app-3.jpg",
+        "content":  "Component structuring guidelines for reusable UI and software content blocks. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-tech-001"
+    },
+    {
+        "id":  "knw-tech-002",
+        "title":  "Technical Note: Deployment Readiness",
+        "type":  "article",
+        "category":  "Technical Notes",
+        "summary":  "Checklist model for deployment validation and release quality gates.",
+        "tags":  [
+                     "software",
+                     "deployment",
+                     "release",
+                     "quality"
+                 ],
+        "related_projects":  [
+                                 "prj-web-002",
+                                 "prj-eng-002"
+                             ],
+        "date":  "2025-03-26",
+        "likes":  24,
+        "cover_image":  "assets/img/portfolio/app-3.jpg",
+        "content":  "Checklist model for deployment validation and release quality gates. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-tech-002"
+    },
+    {
+        "id":  "knw-journal-001",
+        "title":  "Journal Review: Methods Comparison",
+        "type":  "journal",
+        "category":  "Journal Reviews",
+        "summary":  "Comparative review of engineering and research methods for decision support.",
+        "tags":  [
+                     "journal-review",
+                     "journal",
+                     "methods",
+                     "research"
+                 ],
+        "related_projects":  [
+                                 "prj-res-001",
+                                 "prj-eng-002"
+                             ],
+        "date":  "2025-04-14",
+        "likes":  18,
+        "cover_image":  "assets/img/portfolio/books-1.jpg",
+        "content":  "Comparative review of engineering and research methods for decision support. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-journal-001"
+    },
+    {
+        "id":  "knw-journal-002",
+        "title":  "Journal Review: Synthesis Patterns",
+        "type":  "journal",
+        "category":  "Journal Reviews",
+        "summary":  "Review of synthesis approaches to connect fragmented findings into insights.",
+        "tags":  [
+                     "journal-review",
+                     "synthesis",
+                     "literature",
+                     "evidence"
+                 ],
+        "related_projects":  [
+                                 "prj-res-002",
+                                 "prj-res-001"
+                             ],
+        "date":  "2025-04-29",
+        "likes":  16,
+        "cover_image":  "assets/img/portfolio/books-1.jpg",
+        "content":  "Review of synthesis approaches to connect fragmented findings into insights. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-journal-002"
+    },
+    {
+        "id":  "knw-book-001",
+        "title":  "Book Review: Product Discovery Basics",
+        "type":  "review",
+        "category":  "Book Reviews",
+        "summary":  "Review of discovery principles for framing user problems and MVP direction.",
+        "tags":  [
+                     "book-review",
+                     "product-development",
+                     "product",
+                     "strategy"
+                 ],
+        "related_projects":  [
+                                 "prj-prod-001",
+                                 "prj-prod-002"
+                             ],
+        "date":  "2025-05-18",
+        "likes":  20,
+        "cover_image":  "assets/img/portfolio/books-3.jpg",
+        "content":  "Review of discovery principles for framing user problems and MVP direction. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-book-001"
+    },
+    {
+        "id":  "knw-book-002",
+        "title":  "Book Review: Building Digital Systems",
+        "type":  "review",
+        "category":  "Book Reviews",
+        "summary":  "Review notes on architecture trade-offs and long-term system evolution.",
+        "tags":  [
+                     "book-review",
+                     "systems",
+                     "architecture",
+                     "embedded-systems"
+                 ],
+        "related_projects":  [
+                                 "prj-eng-001",
+                                 "prj-res-002"
+                             ],
+        "date":  "2025-06-04",
+        "likes":  17,
+        "cover_image":  "assets/img/portfolio/books-3.jpg",
+        "content":  "Review notes on architecture trade-offs and long-term system evolution. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-book-002"
+    },
+    {
+        "id":  "knw-cert-001",
+        "title":  "Indonesia AI Certification: Basic Python",
+        "type":  "certification",
+        "category":  "Certifications",
+        "summary":  "Completion of Indonesia AI Certification track for Basic Python competency.",
+        "tags":  [
+                     "certification",
+                     "python",
+                     "indonesia-ai",
+                     "programming"
+                 ],
+        "related_projects":  [
+                                 "prj-ev-001",
+                                 "prj-web-001"
+                             ],
+        "date":  "2025-07-01",
+        "likes":  27,
+        "cover_image":  "assets/img/portfolio/branding-3.jpg",
+        "content":  "Completion of Indonesia AI Certification track for Basic Python competency. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-cert-001"
+    },
+    {
+        "id":  "knw-cert-002",
+        "title":  "Indonesia AI Certification: Intermediate Python",
+        "type":  "certification",
+        "category":  "Certifications",
+        "summary":  "Completion of Indonesia AI Certification track for Intermediate Python and applied scripting.",
+        "tags":  [
+                     "certification",
+                     "python",
+                     "intermediate",
+                     "automation"
+                 ],
+        "related_projects":  [
+                                 "prj-ev-001",
+                                 "prj-web-002"
+                             ],
+        "date":  "2025-08-09",
+        "likes":  25,
+        "cover_image":  "assets/img/portfolio/branding-3.jpg",
+        "content":  "Completion of Indonesia AI Certification track for Intermediate Python and applied scripting. This entry is structured for archive readability, cross-reference, and KOM search expansion.",
+        "sections":  [
+                         {
+                             "title":  "Abstract",
+                             "type":  "paragraph",
+                             "content":  "This note/review captures essential context, method, and key findings in a compact format."
+                         },
+                         {
+                             "title":  "Key Insights",
+                             "type":  "list",
+                             "items":  [
+                                           "Linked directly to related projects for traceable decision context.",
+                                           "Tagged with metadata to support ranking and retrieval.",
+                                           "Kept concise for quick scanning and future expansion."
+                                       ]
+                         },
+                         {
+                             "title":  "Next Use Case",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Reuse in project planning",
+                                           "Reference in KOM search prompts",
+                                           "Expand into long-form article when needed"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "knowledge-detail.html?id=knw-cert-002"
+    }
+]

@@ -1,0 +1,105 @@
+﻿{
+    "id":  "profile-main",
+    "name":  "Muhammad Rasyid Putera Agung",
+    "role":  "Electrical Engineer · System Builder · Electric Vehicle Researcher",
+    "headline":  "Electrical Engineer · System Builder · Electric Vehicle Researcher",
+    "location":  "Jakarta Selatan, Indonesia",
+    "summary":  "Electrical Engineer dengan fokus pada Electric Vehicle Technology, Embedded Systems, Power Electronics, dan PCB Design. Memiliki pengalaman melalui proyek kendaraan listrik, kegiatan riset kampus, organisasi teknologi, dan pengalaman kerja engineering.",
+    "bio":  "Electrical Engineer dengan fokus pada Electric Vehicle Technology, Embedded Systems, Power Electronics, dan PCB Design. Memiliki pengalaman melalui proyek kendaraan listrik, kegiatan riset kampus, organisasi teknologi, dan pengalaman kerja engineering.",
+    "contacts":  {
+                     "phone":  "+62-8xx-xxxx-xxxx",
+                     "email":  "rasyid.puteraagung19@gmail.com",
+                     "linkedin":  "https://www.linkedin.com/in/muhammad-rasyid-putera-agung-1274ba216/",
+                     "github":  "https://github.com/mrasyidputeraa",
+                     "instagram":  "https://www.instagram.com/rasyid_puteraagung/"
+                 },
+    "social_links":  [
+                         {
+                             "platform":  "linkedin",
+                             "url":  "https://www.linkedin.com/in/muhammad-rasyid-putera-agung-1274ba216/"
+                         },
+                         {
+                             "platform":  "github",
+                             "url":  "https://github.com/mrasyidputeraa"
+                         },
+                         {
+                             "platform":  "instagram",
+                             "url":  "https://www.instagram.com/rasyid_puteraagung/"
+                         }
+                     ],
+    "hard_skills":  [
+                        "PCB Design",
+                        "Electrical System Design",
+                        "Power Electronics",
+                        "EV Wiring",
+                        "PV Installation",
+                        "Python",
+                        "C/C++ (MCU Programming)"
+                    ],
+    "tools":  [
+                  "Altium Designer",
+                  "EasyEDA",
+                  "Proteus",
+                  "Tinkercad"
+              ],
+    "soft_skills":  [
+                        "Negotiation",
+                        "Public Speaking",
+                        "Pitching",
+                        "Project Management",
+                        "Presentation",
+                        "Critical Thinking"
+                    ],
+    "languages":  [
+                      {
+                          "name":  "Indonesian",
+                          "level":  "Native"
+                      },
+                      {
+                          "name":  "English",
+                          "level":  "Fluent"
+                      },
+                      {
+                          "name":  "Japanese",
+                          "level":  "Basic"
+                      }
+                  ],
+    "skills":  [
+                   "PCB Design",
+                   "Electrical System Design",
+                   "Power Electronics",
+                   "EV Wiring",
+                   "Embedded Systems",
+                   "Python",
+                   "C/C++ (MCU Programming)",
+                   "Project Management"
+               ],
+    "hobbies":  [
+                    "Automotive Technology Exploration",
+                    "Technical Reading",
+                    "Research Documentation"
+                ],
+    "interests":  [
+                      "Electric Vehicle Technology",
+                      "Power Electronics",
+                      "Embedded Systems",
+                      "Knowledge Systems"
+                  ],
+    "focus_areas":  [
+                        "Electric Vehicle Technology",
+                        "Embedded Systems",
+                        "Power Electronics",
+                        "PCB Design"
+                    ],
+    "education":  [
+                      {
+                          "institution":  "Universitas Islam Indonesia",
+                          "degree":  "Bachelor of Electrical Engineering",
+                          "period":  "2021 - 2025",
+                          "gpa":  "3.65",
+                          "honors":  "Cumlaude"
+                      }
+                  ],
+    "updated_at":  "2026-03-09",
+    "profile_image":  "assets/img/my-profile-img.jpg"
+}

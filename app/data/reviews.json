@@ -1,0 +1,52 @@
+﻿[
+  {
+    "id": "rev-001",
+    "title": "Journal Review: Methods Comparison",
+    "type": "journal",
+    "category": "Journal Reviews",
+    "summary": "Placeholder review on comparative research methods for technical and product contexts.",
+    "tags": ["journal-review", "research", "methods"],
+    "related_projects": ["prj-res-001", "prj-eng-002"],
+    "url": "knowledge.html#rev-001"
+  },
+  {
+    "id": "rev-002",
+    "title": "Book Review: Product Discovery Basics",
+    "type": "review",
+    "category": "Book Reviews",
+    "summary": "Placeholder review on product discovery and iterative validation.",
+    "tags": ["book-review", "product-development", "strategy"],
+    "related_projects": ["prj-prod-001", "prj-prod-002"],
+    "url": "knowledge.html#rev-002"
+  },
+  {
+    "id": "rev-003",
+    "title": "Review Note: Software Architecture Patterns",
+    "type": "article",
+    "category": "Technical Notes",
+    "summary": "Placeholder review note on architecture pattern trade-offs for scalable systems.",
+    "tags": ["software", "architecture", "patterns"],
+    "related_projects": ["prj-web-001", "prj-eng-001"],
+    "url": "knowledge.html#rev-003"
+  },
+  {
+    "id": "rev-004",
+    "title": "Journal Review: EV Power Electronics Control Strategies",
+    "type": "journal",
+    "category": "Journal Reviews",
+    "summary": "Review on control strategy patterns for EV power electronics and efficiency improvements.",
+    "tags": ["electric-vehicle", "power-electronics", "control", "journal-review"],
+    "related_projects": ["prj-ev-001", "prj-ev-002"],
+    "url": "knowledge.html#rev-004"
+  },
+  {
+    "id": "rev-005",
+    "title": "Review Note: Embedded Systems for EV Applications",
+    "type": "article",
+    "category": "Technical Notes",
+    "summary": "Review notes on embedded architecture and MCU implementation in electric vehicle systems.",
+    "tags": ["embedded-systems", "electric-vehicle", "mcu-programming"],
+    "related_projects": ["prj-ev-001", "prj-eng-001"],
+    "url": "knowledge.html#rev-005"
+  }
+]

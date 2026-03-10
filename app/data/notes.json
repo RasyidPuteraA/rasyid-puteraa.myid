@@ -1,0 +1,74 @@
+﻿[
+  {
+    "id": "note-001",
+    "title": "Execution Checklist for Weekly System Review",
+    "category": "Learning Notes",
+    "summary": "Placeholder note for weekly review cadence and project monitoring.",
+    "tags": ["execution", "workflow", "systems-thinking"],
+    "related_projects": ["prj-eng-001", "prj-prod-001"],
+    "url": "knowledge.html#note-001"
+  },
+  {
+    "id": "note-002",
+    "title": "Embedded Systems Design Considerations",
+    "category": "Technical Notes",
+    "summary": "Placeholder note covering embedded architecture and control constraints.",
+    "tags": ["embedded-systems", "motor-control", "architecture"],
+    "related_projects": ["prj-eng-001", "prj-eng-002"],
+    "url": "knowledge.html#note-002"
+  },
+  {
+    "id": "note-003",
+    "title": "Software Delivery Sequence",
+    "category": "Technical Notes",
+    "summary": "Placeholder note for release sequencing and deployment hygiene.",
+    "tags": ["software", "deployment", "release"],
+    "related_projects": ["prj-web-001", "prj-web-002"],
+    "url": "knowledge.html#note-003"
+  },
+  {
+    "id": "note-achv-001",
+    "title": "Achievement Record: PLN ICE 2022 - 2nd Place",
+    "category": "Major Achievements",
+    "summary": "Competition achievement: 2nd Place at PLN ICE 2022.",
+    "tags": ["achievement", "pln-ice", "competition"],
+    "related_projects": ["prj-ev-002"],
+    "url": "knowledge.html#note-achv-001"
+  },
+  {
+    "id": "note-achv-002",
+    "title": "Achievement Record: KMLI 2023 - 1st Place Braking",
+    "category": "Major Achievements",
+    "summary": "Competition achievement: 1st Place Braking category at KMLI 2023.",
+    "tags": ["achievement", "kmli", "braking", "electric-vehicle"],
+    "related_projects": ["prj-ev-002"],
+    "url": "knowledge.html#note-achv-002"
+  },
+  {
+    "id": "note-achv-003",
+    "title": "Achievement Record: KMLI 2023 - 3rd Place Slalom",
+    "category": "Major Achievements",
+    "summary": "Competition achievement: 3rd Place Slalom category at KMLI 2023.",
+    "tags": ["achievement", "kmli", "slalom", "electric-vehicle"],
+    "related_projects": ["prj-ev-002"],
+    "url": "knowledge.html#note-achv-003"
+  },
+  {
+    "id": "note-achv-004",
+    "title": "Achievement Record: INDES 2024 - Silver Award",
+    "category": "Major Achievements",
+    "summary": "Competition achievement: Silver Award at INDES 2024.",
+    "tags": ["achievement", "indes", "silver-award"],
+    "related_projects": ["prj-ev-001"],
+    "url": "knowledge.html#note-achv-004"
+  },
+  {
+    "id": "note-achv-005",
+    "title": "Achievement Record: HKI - IoT Incinerator Development",
+    "category": "Major Achievements",
+    "summary": "Intellectual property achievement for IoT Incinerator Development (HKI).",
+    "tags": ["achievement", "hki", "iot", "innovation"],
+    "related_projects": ["prj-res-001", "prj-ev-001"],
+    "url": "knowledge.html#note-achv-005"
+  }
+]

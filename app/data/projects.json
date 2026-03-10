@@ -1,0 +1,488 @@
+﻿[
+    {
+        "id":  "prj-eng-001",
+        "title":  "Engineering Systems Baseline",
+        "category":  "Engineering Projects",
+        "summary":  "Structured baseline for embedded architecture, control interfaces, and reliability checkpoints.",
+        "status":  "In Progress",
+        "tags":  [
+                     "embedded-systems",
+                     "architecture",
+                     "systems",
+                     "reliability"
+                 ],
+        "related_knowledge":  [
+                                  "knw-tech-001",
+                                  "knw-learn-001"
+                              ],
+        "date":  "2025-01-18",
+        "likes":  28,
+        "cover_image":  "assets/img/portfolio/app-1.jpg",
+        "content":  "Structured baseline for embedded architecture, control interfaces, and reliability checkpoints. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Engineering Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-eng-001"
+    },
+    {
+        "id":  "prj-eng-002",
+        "title":  "Performance Audit Toolkit",
+        "category":  "Engineering Projects",
+        "summary":  "Toolkit placeholder for motor control profiling, benchmarking, and performance documentation.",
+        "status":  "Draft",
+        "tags":  [
+                     "motor-control",
+                     "performance",
+                     "benchmark",
+                     "audit"
+                 ],
+        "related_knowledge":  [
+                                  "knw-tech-002",
+                                  "knw-journal-001"
+                              ],
+        "date":  "2025-02-07",
+        "likes":  17,
+        "cover_image":  "assets/img/portfolio/app-1.jpg",
+        "content":  "Toolkit placeholder for motor control profiling, benchmarking, and performance documentation. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Engineering Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-eng-002"
+    },
+    {
+        "id":  "prj-res-001",
+        "title":  "Research Framework Draft",
+        "category":  "Research Projects",
+        "summary":  "Research method framing for comparing implementation alternatives and evidence quality.",
+        "status":  "In Progress",
+        "tags":  [
+                     "research",
+                     "methodology",
+                     "analysis",
+                     "journal-review"
+                 ],
+        "related_knowledge":  [
+                                  "knw-journal-001",
+                                  "knw-journal-002"
+                              ],
+        "date":  "2025-03-14",
+        "likes":  23,
+        "cover_image":  "assets/img/portfolio/books-1.jpg",
+        "content":  "Research method framing for comparing implementation alternatives and evidence quality. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Research Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-res-001"
+    },
+    {
+        "id":  "prj-res-002",
+        "title":  "Literature Insight Matrix",
+        "category":  "Research Projects",
+        "summary":  "Matrix-based synthesis of papers, findings, and structured evidence clusters.",
+        "status":  "Planned",
+        "tags":  [
+                     "research",
+                     "literature",
+                     "synthesis",
+                     "evidence"
+                 ],
+        "related_knowledge":  [
+                                  "knw-journal-002",
+                                  "knw-book-002"
+                              ],
+        "date":  "2025-04-03",
+        "likes":  15,
+        "cover_image":  "assets/img/portfolio/books-1.jpg",
+        "content":  "Matrix-based synthesis of papers, findings, and structured evidence clusters. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Research Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-res-002"
+    },
+    {
+        "id":  "prj-prod-001",
+        "title":  "MVP Scope Definition",
+        "category":  "Product Development",
+        "summary":  "Define minimum product boundary and user-value assumptions for early release.",
+        "status":  "In Progress",
+        "tags":  [
+                     "product-development",
+                     "mvp",
+                     "discovery",
+                     "strategy"
+                 ],
+        "related_knowledge":  [
+                                  "knw-book-001",
+                                  "knw-learn-002"
+                              ],
+        "date":  "2025-04-25",
+        "likes":  26,
+        "cover_image":  "assets/img/portfolio/product-1.jpg",
+        "content":  "Define minimum product boundary and user-value assumptions for early release. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Product Development\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-prod-001"
+    },
+    {
+        "id":  "prj-prod-002",
+        "title":  "Feature Prioritization Board",
+        "category":  "Product Development",
+        "summary":  "Prioritization model for release sequencing, scope control, and product roadmap clarity.",
+        "status":  "Planned",
+        "tags":  [
+                     "product-development",
+                     "roadmap",
+                     "prioritization",
+                     "release"
+                 ],
+        "related_knowledge":  [
+                                  "knw-tech-001",
+                                  "knw-book-001"
+                              ],
+        "date":  "2025-05-19",
+        "likes":  19,
+        "cover_image":  "assets/img/portfolio/product-1.jpg",
+        "content":  "Prioritization model for release sequencing, scope control, and product roadmap clarity. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Product Development\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-prod-002"
+    },
+    {
+        "id":  "prj-web-001",
+        "title":  "Web Platform Foundation",
+        "category":  "Software / Web Projects",
+        "summary":  "Foundation layer for software architecture, layout structure, and modular web content blocks.",
+        "status":  "In Progress",
+        "tags":  [
+                     "software",
+                     "web",
+                     "frontend",
+                     "architecture"
+                 ],
+        "related_knowledge":  [
+                                  "knw-tech-001",
+                                  "knw-tech-002"
+                              ],
+        "date":  "2025-06-06",
+        "likes":  31,
+        "cover_image":  "assets/img/portfolio/app-2.jpg",
+        "content":  "Foundation layer for software architecture, layout structure, and modular web content blocks. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Software / Web Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-web-001"
+    },
+    {
+        "id":  "prj-web-002",
+        "title":  "Deployment Readiness Checklist",
+        "category":  "Software / Web Projects",
+        "summary":  "Release quality checklist for static deployment workflow and software maintenance rhythm.",
+        "status":  "Draft",
+        "tags":  [
+                     "software",
+                     "deployment",
+                     "quality",
+                     "checklist"
+                 ],
+        "related_knowledge":  [
+                                  "knw-tech-002",
+                                  "knw-learn-002"
+                              ],
+        "date":  "2025-06-28",
+        "likes":  22,
+        "cover_image":  "assets/img/portfolio/app-2.jpg",
+        "content":  "Release quality checklist for static deployment workflow and software maintenance rhythm. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Software / Web Projects\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-web-002"
+    },
+    {
+        "id":  "prj-ev-001",
+        "title":  "Smart DC-DC Converter for Electric Vehicle",
+        "type":  "Capstone Project",
+        "year":  2025,
+        "category":  "Power Electronics / Electric Vehicle",
+        "summary":  "Capstone project on smart DC-DC converter architecture for electric vehicle power regulation and efficiency optimization.",
+        "status":  "Completed",
+        "tags":  [
+                     "electric-vehicle",
+                     "power-electronics",
+                     "dc-dc-converter",
+                     "embedded-systems"
+                 ],
+        "related_knowledge":  [
+                                  "knw-cert-001",
+                                  "knw-cert-002",
+                                  "note-achv-004"
+                              ],
+        "date":  "2025-08-12",
+        "likes":  44,
+        "cover_image":  "assets/img/portfolio/branding-1.jpg",
+        "content":  "Capstone project on smart DC-DC converter architecture for electric vehicle power regulation and efficiency optimization. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Power Electronics / Electric Vehicle\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-ev-001"
+    },
+    {
+        "id":  "prj-ev-002",
+        "title":  "Gokart EV Aswatama",
+        "type":  "Electric Vehicle Project",
+        "year":  2024,
+        "category":  "Electric Vehicle",
+        "summary":  "Electric vehicle gokart development project covering electrical system integration, EV wiring, and race-readiness validation.",
+        "status":  "Completed",
+        "tags":  [
+                     "electric-vehicle",
+                     "ev-wiring",
+                     "power-system",
+                     "competition"
+                 ],
+        "related_knowledge":  [
+                                  "note-achv-001",
+                                  "note-achv-002",
+                                  "note-achv-003"
+                              ],
+        "date":  "2024-11-22",
+        "likes":  39,
+        "cover_image":  "assets/img/portfolio/branding-2.jpg",
+        "content":  "Electric vehicle gokart development project covering electrical system integration, EV wiring, and race-readiness validation. This detail page documents context, implementation approach, and current progress in a structured archive format.",
+        "sections":  [
+                         {
+                             "title":  "Context and Goal",
+                             "type":  "paragraph",
+                             "content":  "This project in category \u0027Electric Vehicle\u0027 is maintained as part of the long-term portfolio and knowledge system preparation."
+                         },
+                         {
+                             "title":  "Implementation Highlights",
+                             "type":  "list",
+                             "items":  [
+                                           "Defined scope, constraints, and expected output before implementation.",
+                                           "Captured status, tags, and related knowledge for search-readiness.",
+                                           "Maintained compatibility with unified data architecture and admin flow."
+                                       ]
+                         },
+                         {
+                             "title":  "Current Direction",
+                             "type":  "steps",
+                             "steps":  [
+                                           "Review baseline and constraints",
+                                           "Iterate implementation and validation",
+                                           "Document insights for KOM indexing"
+                                       ]
+                         }
+                     ],
+        "author":  "Muhammad Rasyid Putera Agung",
+        "url":  "project-detail.html?id=prj-ev-002"
+    }
+]

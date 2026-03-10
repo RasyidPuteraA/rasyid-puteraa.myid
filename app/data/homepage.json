@@ -1,0 +1,44 @@
+﻿{
+    "id":  "homepage-main",
+    "hero":  {
+                 "title":  "Search-First Personal Knowledge Website",
+                 "subtitle":  "Website personal profesional dengan fondasi systems thinking dan KOM expansion.",
+                 "typed_items":  [
+                                     "Embedded Systems",
+                                     "Product Development",
+                                     "Knowledge Systems",
+                                     "Software Architecture"
+                                 ]
+             },
+    "sections":  [
+                     {
+                         "id":  "hero",
+                         "title":  "Hero / Introduction",
+                         "status":  "active"
+                     },
+                     {
+                         "id":  "about",
+                         "title":  "Identity Snapshot",
+                         "status":  "active"
+                     },
+                     {
+                         "id":  "projects",
+                         "title":  "Featured Projects",
+                         "status":  "active"
+                     },
+                     {
+                         "id":  "knowledge",
+                         "title":  "Knowledge Preview",
+                         "status":  "active"
+                     },
+                     {
+                         "id":  "kom",
+                         "title":  "KOM Preview",
+                         "status":  "active"
+                     }
+                 ],
+    "updated_at":  "2026-03-09",
+    "hero_background_image":  "assets/img/hero-bg.jpg",
+    "hero_image":  "assets/img/hero-bg.jpg",
+    "about_profile_image":  "assets/img/my-profile-img.jpg"
+}

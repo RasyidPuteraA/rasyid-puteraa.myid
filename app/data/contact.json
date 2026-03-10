@@ -1,0 +1,27 @@
+﻿{
+    "id":  "contact-main",
+    "phone":  "+62-8xx-xxxx-xxxx",
+    "email":  "rasyid.puteraagung19@gmail.com",
+    "linkedin":  "https://www.linkedin.com/in/muhammad-rasyid-putera-agung-1274ba216/",
+    "github":  "https://github.com/mrasyidputeraa",
+    "location":  "Jakarta Selatan, Indonesia",
+    "availability":  "Open for collaboration",
+    "social_links":  [
+                         {
+                             "platform":  "linkedin",
+                             "url":  "https://www.linkedin.com/in/muhammad-rasyid-putera-agung-1274ba216/"
+                         },
+                         {
+                             "platform":  "github",
+                             "url":  "https://github.com/mrasyidputeraa"
+                         },
+                         {
+                             "platform":  "instagram",
+                             "url":  "https://www.instagram.com/rasyid_puteraagung/"
+                         }
+                     ],
+    "updated_at":  "2026-03-09",
+    "instagram":  "https://www.instagram.com/rasyid_puteraagung/",
+    "map_query":  "Jakarta Selatan, Indonesia",
+    "map_embed_url":  "https://www.google.com/maps?q=Jakarta%20Selatan%2C%20Indonesia\u0026output=embed"
+}

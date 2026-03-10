@@ -1,0 +1,51 @@
+﻿{
+  "version": "1.1.0",
+  "search": {
+    "enabled_sources": ["projects", "knowledge"],
+    "available_sources": ["projects", "knowledge", "ventures", "notes", "reviews", "timeline"],
+    "default_filter": "all",
+    "weights": {
+      "title_exact": 140,
+      "title_prefix": 100,
+      "title_contains": 75,
+      "tag_match": 70,
+      "category_match": 45,
+      "type_status_match": 30,
+      "summary_match": 18
+    }
+  },
+  "suggested_prompts": [
+    "electric vehicle",
+    "power electronics",
+    "pcb design",
+    "embedded systems",
+    "electric vehicle projects",
+    "engineering experience",
+    "technical skills"
+  ],
+  "ui": {
+    "filters": ["all", "projects", "knowledge"],
+    "suggested_prompts": [
+      "electric vehicle",
+      "power electronics",
+      "pcb design",
+      "embedded systems",
+      "electric vehicle projects",
+      "engineering experience",
+      "technical skills"
+    ],
+    "topic_clusters": [
+      { "label": "Electric Vehicle", "query": "electric vehicle" },
+      { "label": "Power Electronics", "query": "power electronics" },
+      { "label": "PCB Design", "query": "pcb design" },
+      { "label": "Embedded Systems", "query": "embedded systems" },
+      { "label": "EV Projects", "query": "electric vehicle projects" },
+      { "label": "Engineering Experience", "query": "engineering experience" },
+      { "label": "Technical Skills", "query": "technical skills" },
+      { "label": "Research", "query": "research" },
+      { "label": "Journal Review", "query": "journal review" },
+      { "label": "Software", "query": "software" }
+    ]
+  },
+  "updated_at": "2026-03-09"
+}

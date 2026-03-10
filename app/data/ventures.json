@@ -1,0 +1,87 @@
+﻿[
+    {
+        "id":  "vtr-001",
+        "title":  "Serbada",
+        "description":  "Venture initiative for integrated service and product experimentation with practical engineering execution.",
+        "summary":  "Venture initiative for integrated service and product experimentation with practical engineering execution.",
+        "status":  "Exploration",
+        "role":  "Founder / Builder",
+        "tags":  [
+                     "venture",
+                     "product-development",
+                     "operations"
+                 ],
+        "related_projects":  [
+                                 "prj-prod-001",
+                                 "prj-web-001"
+                             ],
+        "link":  "ventures.html#serbada",
+        "url":  "ventures.html#serbada",
+        "image":  "assets/img/portfolio/product-1.jpg",
+        "cover_image":  "assets/img/portfolio/product-1.jpg"
+    },
+    {
+        "id":  "vtr-002",
+        "title":  "SAKMODUL",
+        "description":  "Venture concept for modular knowledge and learning workflows with structured content systems.",
+        "summary":  "Venture concept for modular knowledge and learning workflows with structured content systems.",
+        "status":  "Prototype",
+        "role":  "System Designer",
+        "tags":  [
+                     "venture",
+                     "knowledge-system",
+                     "software"
+                 ],
+        "related_projects":  [
+                                 "prj-web-001",
+                                 "prj-res-001"
+                             ],
+        "link":  "ventures.html#sakmodul",
+        "url":  "ventures.html#sakmodul",
+        "image":  "assets/img/portfolio/product-2.jpg",
+        "cover_image":  "assets/img/portfolio/product-2.jpg"
+    },
+    {
+        "id":  "vtr-003",
+        "title":  "Future Ventures",
+        "description":  "Container for upcoming initiatives and long-horizon opportunities in engineering and technology ventures.",
+        "summary":  "Container for upcoming initiatives and long-horizon opportunities in engineering and technology ventures.",
+        "status":  "Backlog",
+        "role":  "Strategic Lead",
+        "tags":  [
+                     "venture",
+                     "strategy",
+                     "research"
+                 ],
+        "related_projects":  [
+                                 "prj-res-002",
+                                 "prj-prod-002"
+                             ],
+        "link":  "ventures.html#future-ventures",
+        "url":  "ventures.html#future-ventures",
+        "image":  "assets/img/portfolio/product-3.jpg",
+        "cover_image":  "assets/img/portfolio/product-3.jpg"
+    },
+    {
+        "id":  "vtr-004",
+        "title":  "EV Research and Development Initiative",
+        "description":  "Personal initiative to bridge electric vehicle research outcomes with practical engineering implementation and knowledge dissemination.",
+        "summary":  "Personal initiative to bridge electric vehicle research outcomes with practical engineering implementation and knowledge dissemination.",
+        "status":  "Active",
+        "role":  "Electrical Engineer / EV Researcher",
+        "tags":  [
+                     "electric-vehicle",
+                     "research",
+                     "power-electronics",
+                     "embedded-systems"
+                 ],
+        "related_projects":  [
+                                 "prj-ev-001",
+                                 "prj-ev-002"
+                             ],
+        "link":  "ventures.html#vtr-004",
+        "url":  "ventures.html#vtr-004",
+        "image":  "assets/img/portfolio/branding-1.jpg",
+        "cover_image":  "assets/img/portfolio/branding-1.jpg"
+    }
+]

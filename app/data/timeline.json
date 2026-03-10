@@ -1,0 +1,189 @@
+﻿[
+  {
+    "id": "tml-001",
+    "phase": "Foundation",
+    "title": "Template and Navigation Refactor",
+    "summary": "Establish stable structure, sections, and page architecture.",
+    "status": "Completed",
+    "order": 1,
+    "target_window": "Q1"
+  },
+  {
+    "id": "tml-002",
+    "phase": "Content Archive",
+    "title": "Structured Projects and Knowledge",
+    "summary": "Prepare metadata-rich archive for content growth.",
+    "status": "In Progress",
+    "order": 2,
+    "target_window": "Q2"
+  },
+  {
+    "id": "tml-003",
+    "phase": "Search System",
+    "title": "KOM Smart Search",
+    "summary": "Enable relevance-based exploration across archives.",
+    "status": "In Progress",
+    "order": 3,
+    "target_window": "Q2"
+  },
+  {
+    "id": "tml-004",
+    "phase": "KOM AI",
+    "title": "Assistant Layer",
+    "summary": "Future phase for AI-assisted knowledge interaction.",
+    "status": "Planned",
+    "order": 4,
+    "target_window": "Q3+"
+  },
+  {
+    "id": "tml-edu-001",
+    "category": "Education",
+    "title": "Bachelor of Electrical Engineering",
+    "organization": "Universitas Islam Indonesia",
+    "period": "2021 - 2025",
+    "location": "Yogyakarta, Indonesia",
+    "summary": "Completed Electrical Engineering undergraduate program with GPA 3.65 and Cumlaude honors.",
+    "status": "Completed",
+    "tags": ["education", "electrical-engineering", "cumlaude"],
+    "order": 10
+  },
+  {
+    "id": "tml-work-001",
+    "category": "Work Experience",
+    "title": "Internship Product Engineering",
+    "organization": "PT Astra Juoku Indonesia",
+    "period": "2024",
+    "location": "Indonesia",
+    "summary": "Contributed to product engineering workflow and technical execution for industrial product development.",
+    "status": "Completed",
+    "tags": ["work-experience", "product-engineering", "industry"],
+    "order": 20
+  },
+  {
+    "id": "tml-work-002",
+    "category": "Work Experience",
+    "title": "Trainee Engineer",
+    "organization": "ESDM BBSP KEBTKE",
+    "period": "2024",
+    "location": "Indonesia",
+    "summary": "Participated in trainee engineering program with renewable energy and technology exposure.",
+    "status": "Completed",
+    "tags": ["work-experience", "trainee-engineer", "renewable-energy"],
+    "order": 21
+  },
+  {
+    "id": "tml-work-003",
+    "category": "Work Experience",
+    "title": "Laboratory Assistant - Electric Vehicle Technology",
+    "organization": "Electrical Engineering Laboratory",
+    "period": "2023 - 2025",
+    "location": "Universitas Islam Indonesia",
+    "summary": "Supported practical sessions and mentoring for electric vehicle technology laboratory activities.",
+    "status": "Completed",
+    "tags": ["laboratory-assistant", "electric-vehicle", "teaching"],
+    "order": 22
+  },
+  {
+    "id": "tml-work-004",
+    "category": "Work Experience",
+    "title": "Laboratory Assistant - Electrical Circuit",
+    "organization": "Electrical Engineering Laboratory",
+    "period": "2022 - 2024",
+    "location": "Universitas Islam Indonesia",
+    "summary": "Assisted electrical circuit laboratory instruction and experiment supervision.",
+    "status": "Completed",
+    "tags": ["laboratory-assistant", "electrical-circuit", "teaching"],
+    "order": 23
+  },
+  {
+    "id": "tml-work-005",
+    "category": "Work Experience",
+    "title": "Teaching Assistant - Calculus",
+    "organization": "Universitas Islam Indonesia",
+    "period": "2022",
+    "location": "Yogyakarta, Indonesia",
+    "summary": "Supported calculus classes and tutorials for engineering students.",
+    "status": "Completed",
+    "tags": ["teaching-assistant", "calculus", "education"],
+    "order": 24
+  },
+  {
+    "id": "tml-lead-001",
+    "category": "Leadership Experience",
+    "title": "General Manager",
+    "organization": "UASC EV UII",
+    "period": "2024 - 2025",
+    "location": "Universitas Islam Indonesia",
+    "summary": "Led team coordination, project direction, and competition strategy for EV student activity unit.",
+    "status": "Completed",
+    "tags": ["leadership", "uasc-ev", "electric-vehicle"],
+    "order": 30
+  },
+  {
+    "id": "tml-lead-002",
+    "category": "Leadership Experience",
+    "title": "President",
+    "organization": "IEEE Student Branch UII",
+    "period": "2024 - 2025",
+    "location": "Universitas Islam Indonesia",
+    "summary": "Managed organizational programs, collaboration, and professional development activities.",
+    "status": "Completed",
+    "tags": ["leadership", "ieee", "student-branch"],
+    "order": 31
+  },
+  {
+    "id": "tml-achv-001",
+    "category": "Major Achievements",
+    "title": "PLN ICE 2022 - 2nd Place",
+    "organization": "PLN ICE",
+    "period": "2022",
+    "summary": "Secured 2nd place in PLN ICE 2022 competition.",
+    "status": "Completed",
+    "tags": ["achievement", "competition", "pln-ice"],
+    "order": 40
+  },
+  {
+    "id": "tml-achv-002",
+    "category": "Major Achievements",
+    "title": "KMLI 2023 - 1st Place Braking",
+    "organization": "KMLI",
+    "period": "2023",
+    "summary": "Won 1st place in braking category at KMLI 2023.",
+    "status": "Completed",
+    "tags": ["achievement", "kmli", "electric-vehicle"],
+    "order": 41
+  },
+  {
+    "id": "tml-achv-003",
+    "category": "Major Achievements",
+    "title": "KMLI 2023 - 3rd Place Slalom",
+    "organization": "KMLI",
+    "period": "2023",
+    "summary": "Won 3rd place in slalom category at KMLI 2023.",
+    "status": "Completed",
+    "tags": ["achievement", "kmli", "competition"],
+    "order": 42
+  },
+  {
+    "id": "tml-achv-004",
+    "category": "Major Achievements",
+    "title": "INDES 2024 - Silver Award",
+    "organization": "INDES",
+    "period": "2024",
+    "summary": "Awarded Silver in INDES 2024.",
+    "status": "Completed",
+    "tags": ["achievement", "indes", "award"],
+    "order": 43
+  },
+  {
+    "id": "tml-achv-005",
+    "category": "Major Achievements",
+    "title": "HKI - IoT Incinerator Development",
+    "organization": "Intellectual Property Registration",
+    "period": "2024",
+    "summary": "Obtained HKI recognition for IoT Incinerator Development project.",
+    "status": "Completed",
+    "tags": ["achievement", "hki", "iot"],
+    "order": 44
+  }
+]

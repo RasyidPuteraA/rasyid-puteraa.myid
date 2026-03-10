@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Master Admin Login - mrasyid-puteraa.com</title>
+  <meta content="Prototype login page for local master admin access." name="description">
+  <meta content="admin, login, prototype, local" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="admin-page admin-login-page" data-admin-page="login">
+  <main class="main">
+    <section class="section admin-login-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-7">
+            <div class="card border-0 shadow-sm admin-card admin-login-card">
+              <div class="card-body p-4 p-lg-5">
+                <div class="text-center mb-4">
+                  <span class="badge border text-dark admin-login-badge">Prototype Local Mode</span>
+                  <h1 class="h3 mt-3 mb-2">Master Admin Login</h1>
+                  <p class="admin-login-subtitle mb-0">Akses ini hanya untuk manajemen internal lokal pada fase pengembangan.</p>
+                </div>
+
+                <form id="admin-login-form" novalidate>
+                  <div class="mb-3">
+                    <label for="admin-username" class="form-label">Username</label>
+                    <input id="admin-username" name="username" type="text" class="form-control"
+                      placeholder="Enter username" required>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="admin-password" class="form-label">Password</label>
+                    <input id="admin-password" name="password" type="password" class="form-control"
+                      placeholder="Enter password" required>
+                  </div>
+
+                  <div id="admin-login-error" class="alert alert-danger py-2 mb-3 d-none" role="alert"></div>
+
+                  <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                  </button>
+                </form>
+
+                <div class="mt-4 text-center">
+                  <a class="admin-quiet-link" href="index.html">Back to public website</a>
+                </div>
+              </div>
+            </div>
+
+            <p class="admin-help-text text-center mt-3 mb-0">
+              Gunakan kredensial master yang dikonfigurasi di <code>assets/js/admin-auth.js</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Admin Auth JS -->
+  <script src="assets/js/admin-auth.js"></script>
+</body>
+
+</html>

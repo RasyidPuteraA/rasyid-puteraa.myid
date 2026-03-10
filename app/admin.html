@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Master Admin Dashboard - mrasyid-puteraa.com</title>
+  <meta content="Local admin dashboard for managing unified website data architecture." name="description">
+  <meta content="admin, dashboard, data editor, local storage" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="admin-page admin-dashboard-page" data-admin-page="dashboard">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-brand">
+        <h1 class="h4 mb-1">Master Admin</h1>
+        <p class="mb-0">mrasyid-puteraa.com</p>
+      </div>
+
+      <nav class="admin-sidebar-nav">
+        <a class="admin-nav-link active" href="#module-dashboard"><i class="bi bi-grid-1x2"></i>Dashboard</a>
+        <a class="admin-nav-link" href="#module-profile"><i class="bi bi-person"></i>Profile</a>
+        <a class="admin-nav-link" href="#module-homepage"><i class="bi bi-house"></i>Homepage</a>
+        <a class="admin-nav-link" href="#module-projects"><i class="bi bi-kanban"></i>Projects</a>
+        <a class="admin-nav-link" href="#module-knowledge"><i class="bi bi-journal-bookmark"></i>Knowledge</a>
+        <a class="admin-nav-link" href="#module-ventures"><i class="bi bi-briefcase"></i>Ventures</a>
+        <a class="admin-nav-link" href="#module-kom-config"><i class="bi bi-sliders"></i>KOM Config</a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="index.html" class="btn btn-outline-primary btn-sm w-100 mb-2">Back to Public Site</a>
+        <button id="admin-logout-btn" type="button" class="btn btn-primary btn-sm w-100">Logout</button>
+      </div>
+    </aside>
+
+    <main class="admin-content">
+      <section id="module-dashboard" class="section pt-4">
+        <div class="container-fluid">
+          <div class="card border-0 shadow-sm admin-card mb-4">
+            <div class="card-body">
+              <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
+                <div>
+                  <h2 class="h4 mb-2">Master Admin Dashboard</h2>
+                  <p class="mb-2">Unified local editor for website core data using <code>storage-adapter.js</code> and
+                    <code>data-loader.js</code>.
+                  </p>
+                  <p class="admin-status-line mb-0">
+                    <span class="badge text-bg-success me-2">Session Active</span>
+                    <span id="admin-session-status">Checking session...</span>
+                  </p>
+                </div>
+                <div class="admin-dashboard-meta">
+                  <span class="badge text-bg-light border text-dark">LocalStorage Mode</span>
+                  <span class="badge text-bg-light border text-dark">No Backend</span>
+                </div>
+              </div>
+              <p class="admin-panel-note mb-0 mt-3">
+                Perubahan pada panel ini disimpan lokal di browser. Klik <strong>Reset to Default</strong> pada modul tertentu
+                untuk kembali ke data JSON default di folder <code>/data</code>.
+              </p>
+            </div>
+          </div>
+
+          <div id="admin-init-status" class="alert alert-danger mb-4" hidden></div>
+        </div>
+      </section>
+
+      <section id="module-profile" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Profile Editor</h3>
+                <div class="admin-form-actions">
+                  <button id="profile-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="profile-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="profile-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <form class="row g-3" onsubmit="return false;">
+                <div class="col-md-6">
+                  <label for="profile-name" class="form-label">Name</label>
+                  <input id="profile-name" type="text" class="form-control" placeholder="Full name">
+                </div>
+                <div class="col-md-6">
+                  <label for="profile-headline" class="form-label">Headline</label>
+                  <input id="profile-headline" type="text" class="form-control" placeholder="Professional headline">
+                </div>
+                <div class="col-md-8">
+                  <label for="profile-image" class="form-label">Profile Image Path / Data URL</label>
+                  <input id="profile-image" type="text" class="form-control" placeholder="assets/img/my-profile-img.jpg or data:image/...">
+                </div>
+                <div class="col-md-4">
+                  <label for="profile-image-upload" class="form-label">Upload Profile Image</label>
+                  <input id="profile-image-upload" type="file" class="form-control admin-image-upload"
+                    accept="image/*" data-target-input="profile-image" data-preview-target="profile-image-preview" data-module="profile">
+                </div>
+                <div class="col-12">
+                  <img id="profile-image-preview" class="admin-image-preview" src="assets/img/my-profile-img.jpg" alt="Profile preview">
+                </div>
+                <div class="col-12">
+                  <label for="profile-bio" class="form-label">Bio</label>
+                  <textarea id="profile-bio" class="form-control" rows="3" placeholder="Short profile bio"></textarea>
+                </div>
+                <div class="col-md-4">
+                  <label for="profile-skills" class="form-label">Skills (one item per line)</label>
+                  <textarea id="profile-skills" class="form-control" rows="5" placeholder="Embedded Systems&#10;Software Engineering"></textarea>
+                </div>
+                <div class="col-md-4">
+                  <label for="profile-hobbies" class="form-label">Hobbies (one item per line)</label>
+                  <textarea id="profile-hobbies" class="form-control" rows="5" placeholder="Reading&#10;Cycling"></textarea>
+                </div>
+                <div class="col-md-4">
+                  <label for="profile-interests" class="form-label">Interests (one item per line)</label>
+                  <textarea id="profile-interests" class="form-control" rows="5" placeholder="Knowledge Systems&#10;Product Development"></textarea>
+                </div>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="module-homepage" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Homepage Editor</h3>
+                <div class="admin-form-actions">
+                  <button id="homepage-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="homepage-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="homepage-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <form class="row g-3" onsubmit="return false;">
+                <div class="col-md-6">
+                  <label for="homepage-hero-title" class="form-label">Hero Title</label>
+                  <input id="homepage-hero-title" type="text" class="form-control" placeholder="Hero title">
+                </div>
+                <div class="col-md-6">
+                  <label for="homepage-hero-subtitle" class="form-label">Hero Subtitle</label>
+                  <textarea id="homepage-hero-subtitle" class="form-control" rows="2" placeholder="Hero subtitle"></textarea>
+                </div>
+                <div class="col-md-8">
+                  <label for="homepage-hero-image" class="form-label">Hero Background Image</label>
+                  <input id="homepage-hero-image" type="text" class="form-control" placeholder="assets/img/hero-bg.jpg or data:image/...">
+                </div>
+                <div class="col-md-4">
+                  <label for="homepage-hero-image-upload" class="form-label">Upload Hero Image</label>
+                  <input id="homepage-hero-image-upload" type="file" class="form-control admin-image-upload"
+                    accept="image/*" data-target-input="homepage-hero-image" data-preview-target="homepage-hero-image-preview" data-module="homepage">
+                </div>
+                <div class="col-12">
+                  <img id="homepage-hero-image-preview" class="admin-image-preview" src="assets/img/hero-bg.jpg" alt="Hero preview">
+                </div>
+                <div class="col-md-8">
+                  <label for="homepage-about-image" class="form-label">Identity Snapshot Image</label>
+                  <input id="homepage-about-image" type="text" class="form-control" placeholder="assets/img/my-profile-img.jpg or data:image/...">
+                </div>
+                <div class="col-md-4">
+                  <label for="homepage-about-image-upload" class="form-label">Upload About Image</label>
+                  <input id="homepage-about-image-upload" type="file" class="form-control admin-image-upload"
+                    accept="image/*" data-target-input="homepage-about-image" data-preview-target="homepage-about-image-preview" data-module="homepage">
+                </div>
+                <div class="col-12">
+                  <img id="homepage-about-image-preview" class="admin-image-preview" src="assets/img/my-profile-img.jpg" alt="About preview">
+                </div>
+                <div class="col-md-6">
+                  <label for="homepage-identity-snapshot" class="form-label">Identity Snapshot</label>
+                  <textarea id="homepage-identity-snapshot" class="form-control" rows="3" placeholder="Identity snapshot text"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="homepage-featured-projects" class="form-label">Featured Projects (one item per line)</label>
+                  <textarea id="homepage-featured-projects" class="form-control" rows="3" placeholder="Project A&#10;Project B"></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="homepage-kom-intro" class="form-label">KOM Intro</label>
+                  <textarea id="homepage-kom-intro" class="form-control" rows="3" placeholder="KOM intro text"></textarea>
+                </div>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="module-projects" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Projects Manager</h3>
+                <div class="admin-form-actions">
+                  <button id="projects-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="projects-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="projects-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <div class="row g-3">
+                <div class="col-lg-4">
+                  <div class="admin-list-panel">
+                    <div class="d-flex gap-2 mb-2">
+                      <button id="projects-add-btn" type="button" class="btn btn-outline-primary btn-sm flex-fill">Add New Project</button>
+                      <button id="projects-delete-btn" type="button" class="btn btn-outline-danger btn-sm flex-fill">Delete Project</button>
+                    </div>
+                    <div id="projects-list" class="list-group admin-item-list"></div>
+                  </div>
+                </div>
+
+                <div class="col-lg-8">
+                  <form class="row g-3" onsubmit="return false;">
+                    <div class="col-md-6">
+                      <label for="projects-id" class="form-label">ID</label>
+                      <input id="projects-id" type="text" class="form-control" placeholder="prj-xxx">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-title" class="form-label">Title</label>
+                      <input id="projects-title" type="text" class="form-control" placeholder="Project title">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-category" class="form-label">Category</label>
+                      <input id="projects-category" type="text" class="form-control" placeholder="Engineering Projects">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-status" class="form-label">Status</label>
+                      <input id="projects-status" type="text" class="form-control" placeholder="In Progress">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-date" class="form-label">Date</label>
+                      <input id="projects-date" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-likes" class="form-label">Likes</label>
+                      <input id="projects-likes" type="number" min="0" class="form-control" placeholder="0">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-cover-image" class="form-label">Cover Image Path</label>
+                      <input id="projects-cover-image" type="text" class="form-control" placeholder="assets/img/portfolio/app-1.jpg">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-author" class="form-label">Author</label>
+                      <input id="projects-author" type="text" class="form-control" placeholder="Muhammad Rasyid Putera Agung">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-cover-upload" class="form-label">Upload Cover Image</label>
+                      <input id="projects-cover-upload" type="file" class="form-control admin-image-upload"
+                        accept="image/*" data-target-input="projects-cover-image" data-preview-target="projects-cover-preview" data-module="projects">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                      <img id="projects-cover-preview" class="admin-image-preview" src="assets/img/portfolio/app-1.jpg" alt="Project cover preview">
+                    </div>
+                    <div class="col-12">
+                      <label for="projects-summary" class="form-label">Summary</label>
+                      <textarea id="projects-summary" class="form-control" rows="3" placeholder="Short project summary"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="projects-content" class="form-label">Main Content</label>
+                      <textarea id="projects-content" class="form-control" rows="5" placeholder="Project article body"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="projects-sections" class="form-label">Sections (one per line: Title | paragraph|list|steps | content or item1; item2)</label>
+                      <textarea id="projects-sections" class="form-control" rows="6"
+                        placeholder="Context and Goal | paragraph | Project context...&#10;Implementation Highlights | list | scope definition; metadata mapping&#10;Current Direction | steps | validate baseline; iterate build"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-tags" class="form-label">Tags (one item per line)</label>
+                      <textarea id="projects-tags" class="form-control" rows="4" placeholder="embedded-systems&#10;architecture"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="projects-related-knowledge" class="form-label">Related Knowledge (one item per line)</label>
+                      <textarea id="projects-related-knowledge" class="form-control" rows="4" placeholder="knw-tech-001&#10;knw-learn-001"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="projects-url" class="form-label">URL</label>
+                      <input id="projects-url" type="text" class="form-control" placeholder="projects.html#project-id">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="module-knowledge" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Knowledge Manager</h3>
+                <div class="admin-form-actions">
+                  <button id="knowledge-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="knowledge-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="knowledge-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <div class="row g-3">
+                <div class="col-lg-4">
+                  <div class="admin-list-panel">
+                    <div class="d-flex gap-2 mb-2">
+                      <button id="knowledge-add-btn" type="button" class="btn btn-outline-primary btn-sm flex-fill">Add New Entry</button>
+                      <button id="knowledge-delete-btn" type="button" class="btn btn-outline-danger btn-sm flex-fill">Delete Entry</button>
+                    </div>
+                    <div id="knowledge-list" class="list-group admin-item-list"></div>
+                  </div>
+                </div>
+
+                <div class="col-lg-8">
+                  <form class="row g-3" onsubmit="return false;">
+                    <div class="col-md-6">
+                      <label for="knowledge-id" class="form-label">ID</label>
+                      <input id="knowledge-id" type="text" class="form-control" placeholder="knw-xxx">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-title" class="form-label">Title</label>
+                      <input id="knowledge-title" type="text" class="form-control" placeholder="Knowledge title">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-type" class="form-label">Type</label>
+                      <input id="knowledge-type" type="text" class="form-control" placeholder="note / review / article / journal">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-category" class="form-label">Category</label>
+                      <input id="knowledge-category" type="text" class="form-control" placeholder="Technical Notes">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-date" class="form-label">Date</label>
+                      <input id="knowledge-date" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-likes" class="form-label">Likes</label>
+                      <input id="knowledge-likes" type="number" min="0" class="form-control" placeholder="0">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-cover-image" class="form-label">Cover Image Path</label>
+                      <input id="knowledge-cover-image" type="text" class="form-control" placeholder="assets/img/portfolio/books-1.jpg">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-author" class="form-label">Author</label>
+                      <input id="knowledge-author" type="text" class="form-control" placeholder="Muhammad Rasyid Putera Agung">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-cover-upload" class="form-label">Upload Cover Image</label>
+                      <input id="knowledge-cover-upload" type="file" class="form-control admin-image-upload"
+                        accept="image/*" data-target-input="knowledge-cover-image" data-preview-target="knowledge-cover-preview" data-module="knowledge">
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                      <img id="knowledge-cover-preview" class="admin-image-preview" src="assets/img/portfolio/books-1.jpg" alt="Knowledge cover preview">
+                    </div>
+                    <div class="col-12">
+                      <label for="knowledge-summary" class="form-label">Summary</label>
+                      <textarea id="knowledge-summary" class="form-control" rows="3" placeholder="Short knowledge summary"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="knowledge-content" class="form-label">Main Content</label>
+                      <textarea id="knowledge-content" class="form-control" rows="5" placeholder="Knowledge article body"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="knowledge-sections" class="form-label">Sections (one per line: Title | paragraph|list|steps | content or item1; item2)</label>
+                      <textarea id="knowledge-sections" class="form-control" rows="6"
+                        placeholder="Abstract | paragraph | Brief context...&#10;Key Insights | list | insight one; insight two&#10;Next Use Case | steps | map to project; reuse in KOM"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-tags" class="form-label">Tags (one item per line)</label>
+                      <textarea id="knowledge-tags" class="form-control" rows="4" placeholder="software&#10;architecture"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="knowledge-related-projects" class="form-label">Related Projects (one item per line)</label>
+                      <textarea id="knowledge-related-projects" class="form-control" rows="4" placeholder="prj-web-001&#10;prj-res-001"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="knowledge-url" class="form-label">URL</label>
+                      <input id="knowledge-url" type="text" class="form-control" placeholder="knowledge.html#knowledge-id">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="module-ventures" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Ventures Manager</h3>
+                <div class="admin-form-actions">
+                  <button id="ventures-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="ventures-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="ventures-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <div class="row g-3">
+                <div class="col-lg-4">
+                  <div class="admin-list-panel">
+                    <div class="d-flex gap-2 mb-2">
+                      <button id="ventures-add-btn" type="button" class="btn btn-outline-primary btn-sm flex-fill">Add New Venture</button>
+                      <button id="ventures-delete-btn" type="button" class="btn btn-outline-danger btn-sm flex-fill">Delete Venture</button>
+                    </div>
+                    <div id="ventures-list" class="list-group admin-item-list"></div>
+                  </div>
+                </div>
+
+                <div class="col-lg-8">
+                  <form class="row g-3" onsubmit="return false;">
+                    <div class="col-md-6">
+                      <label for="ventures-id" class="form-label">ID</label>
+                      <input id="ventures-id" type="text" class="form-control" placeholder="vtr-xxx">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="ventures-title" class="form-label">Title</label>
+                      <input id="ventures-title" type="text" class="form-control" placeholder="Venture title">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="ventures-status" class="form-label">Status</label>
+                      <input id="ventures-status" type="text" class="form-control" placeholder="Prototype">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="ventures-link" class="form-label">Link</label>
+                      <input id="ventures-link" type="text" class="form-control" placeholder="ventures.html#venture-id">
+                    </div>
+                    <div class="col-md-8">
+                      <label for="ventures-image" class="form-label">Venture Image Path</label>
+                      <input id="ventures-image" type="text" class="form-control" placeholder="assets/img/portfolio/product-1.jpg or data:image/...">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="ventures-image-upload" class="form-label">Upload Venture Image</label>
+                      <input id="ventures-image-upload" type="file" class="form-control admin-image-upload"
+                        accept="image/*" data-target-input="ventures-image" data-preview-target="ventures-image-preview" data-module="ventures">
+                    </div>
+                    <div class="col-12">
+                      <img id="ventures-image-preview" class="admin-image-preview" src="assets/img/portfolio/product-1.jpg" alt="Venture preview">
+                    </div>
+                    <div class="col-12">
+                      <label for="ventures-description" class="form-label">Description</label>
+                      <textarea id="ventures-description" class="form-control" rows="4" placeholder="Short venture description"></textarea>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="module-kom-config" class="section pt-0 pb-4">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">KOM Config Editor</h3>
+                <div class="admin-form-actions">
+                  <button id="kom-config-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
+                  <button id="kom-config-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+              </div>
+              <div id="kom-config-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
+
+              <form class="row g-3" onsubmit="return false;">
+                <div class="col-md-6">
+                  <label for="kom-config-prompts" class="form-label">Suggested Prompts (one item per line)</label>
+                  <textarea id="kom-config-prompts" class="form-control" rows="8" placeholder="embedded systems&#10;motor control&#10;journal review"></textarea>
+                </div>
+                <div class="col-md-6">
+                  <label for="kom-config-clusters" class="form-label">Topic Clusters (format: Label | query)</label>
+                  <textarea id="kom-config-clusters" class="form-control" rows="8"
+                    placeholder="Embedded Systems | embedded systems&#10;Product Development | product development"></textarea>
+                </div>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Admin JS -->
+  <script src="assets/js/storage-adapter.js"></script>
+  <script src="assets/js/admin-auth.js"></script>
+  <script src="assets/js/admin-panel.js"></script>
+</body>
+
+</html>
