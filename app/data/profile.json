@@ -11,7 +11,8 @@
                      "email":  "rasyid.puteraagung19@gmail.com",
                      "linkedin":  "https://www.linkedin.com/in/muhammad-rasyid-putera-agung-1274ba216/",
                      "github":  "https://github.com/mrasyidputeraa",
-                     "instagram":  "https://www.instagram.com/rasyid_puteraagung/"
+                     "instagram":  "https://www.instagram.com/rasyid_puteraagung/",
+                     "youtube":  "https://www.youtube.com/@Rasyid_Puteraa"
                  },
     "social_links":  [
                          {
@@ -25,6 +26,10 @@
                          {
                              "platform":  "instagram",
                              "url":  "https://www.instagram.com/rasyid_puteraagung/"
+                         },
+                         {
+                             "platform":  "youtube",
+                             "url":  "https://www.youtube.com/@Rasyid_Puteraa"
                          }
                      ],
     "hard_skills":  [

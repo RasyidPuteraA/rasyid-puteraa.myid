@@ -1,52 +1,20 @@
 /**
- * Master Admin Auth Prototype
- * Local-only authentication using localStorage.
+ * Master Admin Auth
+ * Uses backend auth endpoints and HttpOnly cookie session.
  */
 (function () {
   "use strict";
 
-  const SESSION_KEY = "mrp_admin_session_v1";
-  const MASTER_CREDENTIAL = Object.freeze({
-    username: "masteradmin",
-    password: "mrasyid@local2026"
+  const API = Object.freeze({
+    login: "/api/admin/login",
+    session: "/api/admin/session",
+    logout: "/api/admin/logout"
   });
 
-  function getSession() {
-    try {
-      const raw = localStorage.getItem(SESSION_KEY);
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      return parsed && typeof parsed === "object" ? parsed : null;
-    } catch (error) {
-      console.error("Failed to parse admin session:", error);
-      return null;
-    }
-  }
+  let currentSession = null;
 
-  function isSessionValid(session) {
-    if (!session || typeof session !== "object") return false;
-    return (
-      session.isAuthenticated === true &&
-      session.username === MASTER_CREDENTIAL.username &&
-      typeof session.loginAt === "string"
-    );
-  }
-
-  function saveSession() {
-    const payload = {
-      isAuthenticated: true,
-      username: MASTER_CREDENTIAL.username,
-      loginAt: new Date().toISOString()
-    };
-    localStorage.setItem(SESSION_KEY, JSON.stringify(payload));
-  }
-
-  function clearSession() {
-    localStorage.removeItem(SESSION_KEY);
-  }
-
-  function isLoggedIn() {
-    return isSessionValid(getSession());
+  function redirectTo(url) {
+    window.location.href = url;
   }
 
   function showLoginError(message) {
@@ -63,10 +31,6 @@
     errorEl.classList.add("d-none");
   }
 
-  function redirectTo(url) {
-    window.location.href = url;
-  }
-
   function formatDate(dateString) {
     if (!dateString) return "Unknown";
     const date = new Date(dateString);
@@ -74,9 +38,83 @@
     return date.toLocaleString();
   }
 
-  function initLoginPage() {
-    const existing = getSession();
-    if (isSessionValid(existing)) {
+  async function requestJson(url, options) {
+    const response = await fetch(url, {
+      credentials: "include",
+      ...options
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok) {
+      const message =
+        payload && payload.error ? payload.error : "Request gagal diproses";
+      const error = new Error(message);
+      error.status = response.status;
+      throw error;
+    }
+
+    return payload || {};
+  }
+
+  async function fetchSession() {
+    try {
+      const payload = await requestJson(API.session, { method: "GET" });
+      if (payload && payload.authenticated && payload.user) {
+        currentSession = {
+          username: payload.user.username,
+          role: payload.user.role,
+          expiresAt: payload.expiresAt || null
+        };
+      } else {
+        currentSession = null;
+      }
+      return currentSession;
+    } catch (error) {
+      console.error("Failed to fetch admin session:", error);
+      currentSession = null;
+      return null;
+    }
+  }
+
+  async function login(username, password) {
+    const payload = await requestJson(API.login, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    currentSession = {
+      username: payload.user.username,
+      role: payload.user.role,
+      expiresAt: payload.expiresAt || null
+    };
+
+    return currentSession;
+  }
+
+  async function logout() {
+    try {
+      await requestJson(API.logout, { method: "POST" });
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    } finally {
+      currentSession = null;
+    }
+  }
+
+  function isLoggedIn() {
+    return Boolean(currentSession && currentSession.username);
+  }
+
+  async function initLoginPage() {
+    const existingSession = await fetchSession();
+    if (existingSession && existingSession.role === "master") {
       redirectTo("admin.html");
       return;
     }
@@ -86,32 +124,40 @@
     const passwordInput = document.getElementById("admin-password");
     if (!form || !usernameInput || !passwordInput) return;
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
       clearLoginError();
 
       const username = usernameInput.value.trim();
       const password = passwordInput.value;
-
-      if (
-        username === MASTER_CREDENTIAL.username &&
-        password === MASTER_CREDENTIAL.password
-      ) {
-        saveSession();
-        redirectTo("admin.html");
+      if (!username || !password) {
+        showLoginError("Username dan password wajib diisi.");
         return;
       }
 
-      showLoginError("Login gagal. Username atau password tidak valid.");
-      passwordInput.value = "";
-      passwordInput.focus();
+      const submitButton = form.querySelector("button[type='submit']");
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const session = await login(username, password);
+        if (!session || session.role !== "master") {
+          showLoginError("Role akun tidak diizinkan untuk admin.");
+          return;
+        }
+        redirectTo("admin.html");
+      } catch (error) {
+        showLoginError(error.message || "Login gagal.");
+        passwordInput.value = "";
+        passwordInput.focus();
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
     });
   }
 
-  function initDashboardPage() {
-    const session = getSession();
-    if (!isSessionValid(session)) {
-      clearSession();
+  async function initDashboardPage() {
+    const session = await fetchSession();
+    if (!session || session.role !== "master") {
       redirectTo("admin-login.html");
       return;
     }
@@ -121,34 +167,45 @@
       statusEl.textContent =
         "Logged in as " +
         session.username +
-        " (Local session started: " +
-        formatDate(session.loginAt) +
+        " (Role: " +
+        session.role +
+        ", expires: " +
+        formatDate(session.expiresAt) +
         ")";
     }
 
     const logoutButton = document.getElementById("admin-logout-btn");
     if (logoutButton) {
-      logoutButton.addEventListener("click", function () {
-        clearSession();
+      logoutButton.addEventListener("click", async function () {
+        await logout();
         redirectTo("admin-login.html");
       });
     }
   }
 
-  function init() {
+  async function init() {
     const pageType = document.body ? document.body.dataset.adminPage : "";
     if (pageType === "login") {
-      initLoginPage();
-    } else if (pageType === "dashboard") {
-      initDashboardPage();
+      await initLoginPage();
+      return;
+    }
+    if (pageType === "dashboard") {
+      await initDashboardPage();
     }
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", function () {
+    init().catch(function (error) {
+      console.error("Admin auth init error:", error);
+    });
+  });
 
   window.AdminAuth = {
-    getSession: getSession,
-    clearSession: clearSession,
-    isLoggedIn: isLoggedIn
+    fetchSession: fetchSession,
+    getSession: function () {
+      return currentSession;
+    },
+    isLoggedIn: isLoggedIn,
+    logout: logout
   };
 })();

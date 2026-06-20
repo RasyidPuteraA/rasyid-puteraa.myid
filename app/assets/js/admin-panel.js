@@ -10,10 +10,6 @@
     return;
   }
 
-  if (window.AdminAuth && typeof window.AdminAuth.isLoggedIn === "function" && !window.AdminAuth.isLoggedIn()) {
-    return;
-  }
-
   const state = {
     profile: {},
     homepage: {},
@@ -64,6 +60,43 @@
       .flatMap(line => line.split(","))
       .map(item => item.trim())
       .filter(Boolean);
+  }
+
+  function parseSocialLinks(raw) {
+    return String(raw || "")
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(Boolean)
+      .map(line => {
+        const parts = line.split("|").map(item => item.trim());
+        if (parts.length >= 2) {
+          return {
+            platform: (parts[0] || "").toLowerCase(),
+            url: parts.slice(1).join("|")
+          };
+        }
+
+        const asUrl = parts[0];
+        const guessedPlatform = asUrl
+          .replace(/^https?:\/\//i, "")
+          .split(/[/.]/)[0]
+          .replace(/^www$/, "")
+          .toLowerCase();
+
+        return {
+          platform: guessedPlatform || "link",
+          url: asUrl
+        };
+      })
+      .filter(item => item.platform && item.url);
+  }
+
+  function formatSocialLinks(value) {
+    if (!Array.isArray(value)) return "";
+    return value
+      .map(item => `${item.platform || ""} | ${item.url || ""}`.trim())
+      .filter(Boolean)
+      .join("\n");
   }
 
   function toLineArray(value) {
@@ -314,6 +347,7 @@
     const skills = profile.skills || profile.focus_areas || [];
     const hobbies = profile.hobbies || [];
     const interests = profile.interests || [];
+    const socialLinks = ensureArray(profile.social_links);
 
     setInputValue("profile-name", profile.name);
     setInputValue("profile-headline", profile.headline);
@@ -322,6 +356,7 @@
     setInputValue("profile-skills", toLineArray(skills));
     setInputValue("profile-hobbies", toLineArray(hobbies));
     setInputValue("profile-interests", toLineArray(interests));
+    setInputValue("profile-social-links", formatSocialLinks(socialLinks));
     syncImagePreviewFromInput("profile-image", "profile-image-preview", "assets/img/my-profile-img.jpg");
   }
 
@@ -486,6 +521,12 @@
       const name = getInputValue("profile-name");
       const headline = getInputValue("profile-headline");
       const bio = getInputValue("profile-bio");
+      const socialLinks = parseSocialLinks(getInputValue("profile-social-links"));
+      const existingContacts = asObject(asObject(state.profile).contacts);
+      const mergedContacts = Object.assign({}, existingContacts);
+      socialLinks.forEach(item => {
+        mergedContacts[item.platform] = item.url;
+      });
 
       if (!name) {
         showStatus("profile", "Name is required.", "error");
@@ -501,11 +542,13 @@
         hobbies: parseLineArray(getInputValue("profile-hobbies")),
         interests: parseLineArray(getInputValue("profile-interests")),
         focus_areas: parseLineArray(getInputValue("profile-skills")),
+        social_links: socialLinks,
+        contacts: mergedContacts,
         updated_at: todayIso()
       });
 
       await adapter.saveData("profile", state.profile);
-      showStatus("profile", "Profile data saved to localStorage.", "success");
+      showStatus("profile", "Profile data saved to database.", "success");
     } catch (error) {
       showStatus("profile", "Failed to save profile data.", "error");
     }
@@ -515,7 +558,7 @@
     try {
       state.profile = await adapter.resetData("profile");
       renderProfileForm();
-      showStatus("profile", "Profile data reset to default JSON.", "info");
+      showStatus("profile", "Profile data reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("profile", "Failed to reset profile data.", "error");
     }
@@ -552,7 +595,7 @@
       });
 
       await adapter.saveData("homepage", state.homepage);
-      showStatus("homepage", "Homepage data saved to localStorage.", "success");
+      showStatus("homepage", "Homepage data saved to database.", "success");
     } catch (error) {
       showStatus("homepage", "Failed to save homepage data.", "error");
     }
@@ -562,7 +605,7 @@
     try {
       state.homepage = await adapter.resetData("homepage");
       renderHomepageForm();
-      showStatus("homepage", "Homepage data reset to default JSON.", "info");
+      showStatus("homepage", "Homepage data reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("homepage", "Failed to reset homepage data.", "error");
     }
@@ -616,7 +659,7 @@
       state.projects = items;
       await adapter.saveData("projects", state.projects);
       refreshProjectsModule();
-      showStatus("projects", "Project data saved to localStorage.", "success");
+      showStatus("projects", "Project data saved to database.", "success");
     } catch (error) {
       showStatus("projects", "Failed to save project data.", "error");
     }
@@ -627,7 +670,7 @@
       state.projects = ensureArray(await adapter.resetData("projects"));
       state.selected.projects = 0;
       refreshProjectsModule();
-      showStatus("projects", "Projects reset to default JSON.", "info");
+      showStatus("projects", "Projects reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("projects", "Failed to reset projects data.", "error");
     }
@@ -745,7 +788,7 @@
       state.knowledge = items;
       await adapter.saveData("knowledge", state.knowledge);
       refreshKnowledgeModule();
-      showStatus("knowledge", "Knowledge data saved to localStorage.", "success");
+      showStatus("knowledge", "Knowledge data saved to database.", "success");
     } catch (error) {
       showStatus("knowledge", "Failed to save knowledge data.", "error");
     }
@@ -756,7 +799,7 @@
       state.knowledge = ensureArray(await adapter.resetData("knowledge"));
       state.selected.knowledge = 0;
       refreshKnowledgeModule();
-      showStatus("knowledge", "Knowledge entries reset to default JSON.", "info");
+      showStatus("knowledge", "Knowledge entries reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("knowledge", "Failed to reset knowledge data.", "error");
     }
@@ -867,7 +910,7 @@
       state.ventures = items;
       await adapter.saveData("ventures", state.ventures);
       refreshVenturesModule();
-      showStatus("ventures", "Venture data saved to localStorage.", "success");
+      showStatus("ventures", "Venture data saved to database.", "success");
     } catch (error) {
       showStatus("ventures", "Failed to save venture data.", "error");
     }
@@ -878,7 +921,7 @@
       state.ventures = ensureArray(await adapter.resetData("ventures"));
       state.selected.ventures = 0;
       refreshVenturesModule();
-      showStatus("ventures", "Ventures reset to default JSON.", "info");
+      showStatus("ventures", "Ventures reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("ventures", "Failed to reset ventures data.", "error");
     }
@@ -959,7 +1002,7 @@
 
       await adapter.saveData("kom-config", state.komConfig);
       renderKomConfigForm();
-      showStatus("kom-config", "KOM config saved to localStorage.", "success");
+      showStatus("kom-config", "KOM config saved to database.", "success");
     } catch (error) {
       showStatus("kom-config", "Failed to save KOM config.", "error");
     }
@@ -969,7 +1012,7 @@
     try {
       state.komConfig = asObject(await adapter.resetData("kom-config"));
       renderKomConfigForm();
-      showStatus("kom-config", "KOM config reset to default JSON.", "info");
+      showStatus("kom-config", "KOM config reset from template and saved to database.", "info");
     } catch (error) {
       showStatus("kom-config", "Failed to reset KOM config.", "error");
     }
@@ -1074,18 +1117,18 @@
       state.komConfig = asObject(loaded[5]);
 
       renderAllModules();
-      showStatus("profile", "Profile source loaded.", "info");
-      showStatus("homepage", "Homepage source loaded.", "info");
-      showStatus("projects", "Projects source loaded.", "info");
-      showStatus("knowledge", "Knowledge source loaded.", "info");
-      showStatus("ventures", "Ventures source loaded.", "info");
-      showStatus("kom-config", "KOM config source loaded.", "info");
+      showStatus("profile", "Profile data loaded from database.", "info");
+      showStatus("homepage", "Homepage data loaded from database.", "info");
+      showStatus("projects", "Projects data loaded from database.", "info");
+      showStatus("knowledge", "Knowledge data loaded from database.", "info");
+      showStatus("ventures", "Ventures data loaded from database.", "info");
+      showStatus("kom-config", "KOM config loaded from database.", "info");
     } catch (error) {
       console.error(error);
       const initStatus = byId("admin-init-status");
       if (initStatus) {
         initStatus.hidden = false;
-        initStatus.textContent = "Failed to load one or more data sources. Check /data JSON files.";
+        initStatus.textContent = "Failed to load one or more data sources from API/database.";
       }
     }
   }

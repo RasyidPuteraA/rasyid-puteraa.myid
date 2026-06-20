@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
   "use strict";
 
   const body = document.body;
@@ -10,30 +10,6 @@
 
   const footerContainer = document.querySelector("#footer .container");
   if (!footerContainer) return;
-
-  const storageKey = "mrp_visitor_counter_v1";
-
-  function readCounter() {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (!raw) return { total: 0, pages: {} };
-      const parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed !== "object") return { total: 0, pages: {} };
-      if (!parsed.pages || typeof parsed.pages !== "object") parsed.pages = {};
-      if (typeof parsed.total !== "number") parsed.total = 0;
-      return parsed;
-    } catch (error) {
-      return { total: 0, pages: {} };
-    }
-  }
-
-  function saveCounter(counter) {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(counter));
-    } catch (error) {
-      // ignore if storage is unavailable
-    }
-  }
 
   function renderText(message) {
     let el = document.getElementById("visitor-counter-text");
@@ -51,12 +27,37 @@
     el.textContent = message;
   }
 
-  const counter = readCounter();
-  const path = window.location.pathname || "index.html";
+  async function updateCounter() {
+    try {
+      const response = await fetch("/api/visitor-counter", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ path: window.location.pathname || "/" })
+      });
 
-  counter.total += 1;
-  counter.pages[path] = (Number(counter.pages[path]) || 0) + 1;
-  saveCounter(counter);
+      let payload = null;
+      try {
+        payload = await response.json();
+      } catch (error) {
+        payload = null;
+      }
 
-  renderText("Visitor counter: " + counter.total + " views (" + counter.pages[path] + " on this page, local browser).");
+      if (!response.ok || !payload || payload.ok !== true) {
+        throw new Error((payload && payload.error) || "Visitor counter unavailable");
+      }
+
+      renderText(
+        "Visitor counter: " +
+          String(payload.totalViews) +
+          " views (" +
+          String(payload.pageViews) +
+          " on this page)."
+      );
+    } catch (error) {
+      renderText("Visitor counter unavailable right now.");
+    }
+  }
+
+  updateCounter();
 })();

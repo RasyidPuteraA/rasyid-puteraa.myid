@@ -1,0 +1,20 @@
+{
+  "name": "rasyid-puteraa-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal Node.js site for rasyid-puteraa.my.id",
+  "scripts": {
+    "start": "node server.js",
+    "db:init": "node scripts/init-db.js",
+    "db:seed": "node scripts/seed-db.js",
+    "db:setup": "node scripts/init-db.js && node scripts/seed-db.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "googleapis": "^171.4.0",
+    "pg": "^8.20.0"
+  }
+}

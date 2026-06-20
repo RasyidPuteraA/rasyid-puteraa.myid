@@ -83,15 +83,53 @@
 
   function renderTagBadges(tags) {
     const list = ensureArray(tags);
-    if (!list.length) return '<span class="badge border text-dark">#placeholder</span>';
+    if (!list.length) return "";
     return list.map(tag => `<span class="badge border text-dark">#${escapeHtml(String(tag).replace(/\s+/g, "-"))}</span>`).join("");
   }
 
   function setSiteName(name) {
-    if (!name) return;
     document.querySelectorAll(".sitename").forEach(element => {
-      element.textContent = name;
+      element.textContent = name || "";
     });
+  }
+
+  function iconClassByPlatform(platform) {
+    const key = normalize(platform);
+    if (key === "linkedin") return "bi-linkedin";
+    if (key === "github") return "bi-github";
+    if (key === "instagram") return "bi-instagram";
+    if (key === "youtube") return "bi-youtube";
+    if (key === "twitter" || key === "x") return "bi-twitter-x";
+    if (key === "facebook") return "bi-facebook";
+    return "bi-link-45deg";
+  }
+
+  function socialLinksFromSource(source) {
+    if (Array.isArray(source)) return source;
+    return ensureArray(asObject(source).social_links);
+  }
+
+  function renderSocialLinks(profile, contact, options = {}) {
+    const container = document.querySelector(".social-links");
+    if (!container) return;
+
+    const profileLinks = socialLinksFromSource(profile);
+    const contactLinks = socialLinksFromSource(contact);
+    const links = profileLinks.length ? profileLinks : contactLinks;
+    const clearIfEmpty = options.clearIfEmpty !== false;
+    if (!links.length) {
+      if (clearIfEmpty) {
+        container.innerHTML = "";
+      }
+      return;
+    }
+
+    container.innerHTML = links.map((item) => {
+      const platform = item.platform || item.name || "link";
+      const url = item.url || "#";
+      const icon = iconClassByPlatform(platform);
+      return `<a href="${escapeHtml(url)}" class="${escapeHtml(normalize(platform) || "link")}" target="_blank" rel="noopener noreferrer"><i class="bi ${escapeHtml(icon)}"></i></a>`;
+    }).join("");
   }
 
   function setText(id, text) {
@@ -105,21 +143,27 @@
     if (!element) return;
     const safeHref = href || "#";
     element.setAttribute("href", safeHref);
-    element.textContent = label || safeHref;
+    element.textContent = label || "";
   }
 
-  function setImageSource(id, src, fallback) {
+  function setImageSource(id, src) {
     const element = byId(id);
     if (!element) return;
-    const resolved = String(src || "").trim() || String(fallback || "").trim();
-    if (!resolved) return;
+    const resolved = String(src || "").trim();
+    if (!resolved) {
+      element.removeAttribute("src");
+      return;
+    }
     element.setAttribute("src", resolved);
   }
 
   function setProfileImages(src) {
     const resolved = String(src || "").trim();
-    if (!resolved) return;
     document.querySelectorAll(".profile-img img").forEach(img => {
+      if (!resolved) {
+        img.removeAttribute("src");
+        return;
+      }
       img.setAttribute("src", resolved);
     });
   }
@@ -134,33 +178,68 @@
       return directUrl;
     }
 
-    const mapQuery = String(contact.map_query || fallbackLocation || "Jakarta Selatan, Indonesia").trim();
+    const mapQuery = String(contact.map_query || fallbackLocation || "").trim();
+    if (!mapQuery) return "";
     return `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
   }
 
-  function resolveLoader() {
-    if (window.DataLoader && typeof window.DataLoader.loadAllData === "function") {
-      return window.DataLoader;
+  function createEmptySiteContent() {
+    return {
+      homepage: {},
+      profile: {},
+      timeline: [],
+      notes: [],
+      skills: [],
+      social_links: [],
+      ventures: [],
+      projects: [],
+      knowledge: [],
+      contact: {},
+      reviews: [],
+      "kom-config": {}
+    };
+  }
+
+  async function loadSiteContent() {
+    const response = await fetch("/api/site-content", {
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch site content (${response.status})`);
     }
-    return null;
+
+    const payload = asObject(await response.json());
+    return {
+      homepage: asObject(payload.homepage),
+      profile: asObject(payload.profile),
+      timeline: ensureArray(payload.timeline),
+      notes: ensureArray(payload.notes),
+      skills: ensureArray(payload.skills),
+      social_links: ensureArray(payload.social_links),
+      ventures: ensureArray(payload.ventures),
+      projects: ensureArray(payload.projects),
+      knowledge: ensureArray(payload.knowledge),
+      contact: asObject(payload.contact),
+      reviews: ensureArray(payload.reviews),
+      "kom-config": asObject(payload["kom-config"])
+    };
   }
 
-  async function loadSources(sources) {
-    const loader = resolveLoader();
-    if (!loader) throw new Error("DataLoader is unavailable");
-    return loader.loadAllData(sources);
-  }
-
-  function renderHomeFeaturedProjects(homepage, projects) {
+  function renderHomeFeaturedProjects(homepage) {
     const listEl = byId("home-featured-projects-list");
     if (!listEl) return;
 
-    const featured = ensureArray(homepage.featured_projects);
-    const fallback = ensureArray(projects).slice(0, 4).map(item => item.title);
-    const items = featured.length ? featured : fallback;
+    const featuredRaw = homepage.featured_projects;
+    const items = Array.isArray(featuredRaw)
+      ? featuredRaw
+      : String(featuredRaw || "")
+          .split(",")
+          .map(item => item.trim())
+          .filter(Boolean);
 
     if (!items.length) {
-      listEl.innerHTML = '<li class="small text-muted">Featured projects will appear after data is available.</li>';
+      listEl.innerHTML = "";
       return;
     }
 
@@ -169,24 +248,121 @@
       .join("");
   }
 
-  function renderHomeImages(homepage, profile) {
-    const heroImage = homepage.hero_background_image || homepage.hero_image || "";
-    const aboutImage = homepage.about_profile_image || profile.profile_image || "";
-
-    setImageSource("home-hero-bg", heroImage, "assets/img/hero-bg.jpg");
-    setImageSource("home-about-image", aboutImage, "assets/img/my-profile-img.jpg");
+  function noteTags(item) {
+    const source = item ? item.tags : null;
+    if (Array.isArray(source)) {
+      return source.map(tag => String(tag || "").trim()).filter(Boolean);
+    }
+    return String(source || "")
+      .split(",")
+      .map(tag => tag.trim())
+      .filter(Boolean);
   }
 
-  function renderIdentitySkills(profile) {
+  function renderHomeNotes(notes) {
+    const container = byId("home-notes-preview");
+    if (!container) return;
+
+    const list = ensureArray(notes)
+      .filter(item => item && typeof item === "object")
+      .slice(0, 4);
+
+    if (!list.length) {
+      container.innerHTML = "";
+      return;
+    }
+
+    container.innerHTML = list.map(item => {
+      const title = item.title || item.name || "Untitled Note";
+      const category = item.category || item.type || "General";
+      const summary = item.summary || item.description || item.excerpt || "Summary is not available yet.";
+      const tags = noteTags(item).slice(0, 4);
+      const href = item.id
+        ? `knowledge-detail.html?id=${encodeURIComponent(item.id)}`
+        : (item.url || "knowledge.html");
+      const tagsHtml = tags.length
+        ? `<div class="d-flex flex-wrap gap-2 mt-2">${tags.map(tag => `<span class="badge border text-dark">#${escapeHtml(tag)}</span>`).join("")}</div>`
+        : "";
+
+      return `
+        <div class="col-lg-6">
+          <article class="card h-100 border-0 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <p class="small text-muted mb-2">${escapeHtml(category)}</p>
+              <h4 class="h6 mb-2">${escapeHtml(title)}</h4>
+              <p class="mb-3">${escapeHtml(summary)}</p>
+              ${tagsHtml}
+              <a href="${escapeHtml(href)}" class="btn btn-outline-primary btn-sm mt-auto">Open Note</a>
+            </div>
+          </article>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderHomeTimeline(timeline) {
+    const container = document.querySelector("#evolution-map .row.gy-4");
+    if (!container) return;
+
+    const list = ensureArray(timeline)
+      .slice()
+      .sort((a, b) => {
+        const left = Number(a && a.order);
+        const right = Number(b && b.order);
+        const leftValue = Number.isFinite(left) ? left : Number.MAX_SAFE_INTEGER;
+        const rightValue = Number.isFinite(right) ? right : Number.MAX_SAFE_INTEGER;
+        return leftValue - rightValue;
+      });
+
+    if (!list.length) {
+      container.innerHTML = "";
+      return;
+    }
+
+    container.innerHTML = list.map(item => {
+      const title = item.title || item.phase || "";
+      const statusLine = item.period || item.status || "";
+      const meta = [item.organization, item.location].filter(Boolean).join(" | ");
+      const summary = item.summary || "";
+      const description = meta ? `${meta}. ${summary}` : summary;
+
+      return `
+        <div class="col-lg-4 col-md-6">
+          <div class="resume-item h-100">
+            <h4>${escapeHtml(title)}</h4>
+            <h5>${escapeHtml(statusLine)}</h5>
+            <p>${escapeHtml(description)}</p>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderHomeImages(homepage, profile) {
+    const heroImage = homepage.hero_image_path || "";
+    const aboutImage = homepage.about_profile_image_path || profile.profile_image_path || "";
+
+    setImageSource("home-hero-bg", heroImage);
+    setImageSource("home-about-image", aboutImage);
+  }
+
+  function toSkillLabel(item) {
+    if (typeof item === "string") return item.trim();
+    if (!item || typeof item !== "object") return "";
+    return String(item.skill || item.name || item.title || item.label || "").trim();
+  }
+
+  function renderIdentitySkills(skills) {
     const container = byId("home-skill-badges");
     if (!container) return;
 
-    const hardSkills = ensureArray(profile.hard_skills);
-    const fallbackSkills = ensureArray(profile.skills);
-    const list = (hardSkills.length ? hardSkills : fallbackSkills).slice(0, 8);
+    const list = ensureArray(skills)
+      .map(toSkillLabel)
+      .filter(Boolean)
+      .slice(0, 8);
 
     if (!list.length) {
-      container.innerHTML = '<span class="badge border text-dark">skill-placeholder</span>';
+      container.innerHTML = "";
       return;
     }
 
@@ -199,31 +375,65 @@
     const contactData = asObject(contact);
     const profileContactData = asObject(profileContacts);
 
-    const address = contactData.location || fallbackLocation || "Jakarta Selatan, Indonesia";
+    const address = contactData.location || fallbackLocation || "";
     const phone = contactData.phone || profileContactData.phone || "";
     const email = contactData.email || profileContactData.email || "";
-    const availability = contactData.availability || "Open for collaboration.";
+    const availability = contactData.availability || "";
 
     setText("contact-address", address);
-    setText("contact-section-note", `${availability} You can contact me via form, email, or direct phone.`);
+    setText("contact-section-note", availability);
 
     const phoneLinkEl = byId("contact-phone-link");
     if (phoneLinkEl) {
       const normalizedPhone = normalizePhoneForTel(phone);
-      phoneLinkEl.textContent = phone || "Phone not available yet";
+      phoneLinkEl.textContent = phone;
       phoneLinkEl.setAttribute("href", normalizedPhone ? `tel:${normalizedPhone}` : "#");
     }
 
     const emailLinkEl = byId("contact-email-link");
     if (emailLinkEl) {
-      emailLinkEl.textContent = email || "Email not available yet";
+      emailLinkEl.textContent = email;
       emailLinkEl.setAttribute("href", email ? `mailto:${email}` : "#");
     }
 
     const mapEl = byId("contact-map-embed");
     if (mapEl) {
-      mapEl.setAttribute("src", resolveMapEmbedUrl(contactData, address));
+      const mapUrl = resolveMapEmbedUrl(contactData, address);
+      if (mapUrl) {
+        mapEl.setAttribute("src", mapUrl);
+      } else {
+        mapEl.removeAttribute("src");
+      }
     }
+  }
+
+  function renderHomeVenturesPreview(ventures) {
+    const wrapper = byId("home-ventures-preview");
+    if (!wrapper) return;
+
+    const list = ensureArray(ventures)
+      .filter(item => item && typeof item === "object")
+      .slice(0, 6);
+
+    if (!list.length) {
+      wrapper.innerHTML = "";
+      return;
+    }
+
+    wrapper.innerHTML = list.map(item => {
+      const title = item.title || "";
+      const status = item.status ? `Status: ${item.status}` : "";
+      const summary = item.description || item.summary || "";
+      return `
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <h3>${escapeHtml(title)}</h3>
+            <h4>${escapeHtml(status)}</h4>
+            <p><span>${escapeHtml(summary)}</span></p>
+          </div>
+        </div>
+      `;
+    }).join("");
   }
 
   function renderProjectsArchive(projects, knowledgeMap) {
@@ -254,7 +464,7 @@
                   <span class="badge ${badgeClassByStatus(item.status)}">${escapeHtml(item.status || "Draft")}</span>
                 </div>
                 <p class="small mb-2"><strong>Category:</strong> ${escapeHtml(item.category || "Uncategorized")}</p>
-                <p class="mb-3">${escapeHtml(item.summary || "Summary placeholder.")}</p>
+                <p class="mb-3">${escapeHtml(item.summary || "")}</p>
                 <div class="mb-3 d-flex flex-wrap gap-2">${renderTagBadges(item.tags)}</div>
                 <p class="small mb-3"><strong>Related knowledge:</strong> ${escapeHtml(related || "No related reference")}</p>
                 <a href="${escapeHtml(detailHref)}" class="btn btn-outline-primary btn-sm mt-auto">View Project</a>
@@ -322,7 +532,7 @@
                   <span class="badge ${badgeClassByType(item.type)}">${escapeHtml((item.type || "note").toUpperCase())}</span>
                 </div>
                 <p class="small mb-2"><strong>Category:</strong> ${escapeHtml(item.category || "Uncategorized")}</p>
-                <p class="mb-3">${escapeHtml(item.summary || "Summary placeholder.")}</p>
+                <p class="mb-3">${escapeHtml(item.summary || "")}</p>
                 <div class="mb-3 d-flex flex-wrap gap-2">${renderTagBadges(item.tags)}</div>
                 <p class="small mb-3"><strong>Related project:</strong> ${escapeHtml(related || "No related reference")}</p>
                 <a href="${escapeHtml(detailHref)}" class="btn btn-outline-primary btn-sm mt-auto">Open Entry</a>
@@ -372,24 +582,31 @@
       return;
     }
 
-    container.innerHTML = list.map(item => `
-      <div class="col-lg-4 col-md-6">
-        <article id="${escapeHtml(item.id || slugify(item.title))}" class="card h-100 border-0 shadow-sm archive-entry-card">
-          <img src="${escapeHtml(item.image || item.cover_image || "assets/img/portfolio/product-1.jpg")}" class="card-img-top" alt="${escapeHtml(item.title || "Venture")} cover">
-          <div class="card-body d-flex flex-column">
-            <div class="d-flex justify-content-between align-items-start mb-2 gap-2">
-              <h3 class="h5 mb-0">${escapeHtml(item.title || "Untitled Venture")}</h3>
-              <span class="badge ${badgeClassByStatus(item.status)}">${escapeHtml(item.status || "Draft")}</span>
+    container.innerHTML = list.map(item => {
+      const image = item.image || item.cover_image || "";
+      const imageHtml = image
+        ? `<img src="${escapeHtml(image)}" class="card-img-top" alt="${escapeHtml(item.title || "Venture")} cover">`
+        : "";
+
+      return `
+        <div class="col-lg-4 col-md-6">
+          <article id="${escapeHtml(item.id || slugify(item.title))}" class="card h-100 border-0 shadow-sm archive-entry-card">
+            ${imageHtml}
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-2 gap-2">
+                <h3 class="h5 mb-0">${escapeHtml(item.title || "")}</h3>
+                <span class="badge ${badgeClassByStatus(item.status)}">${escapeHtml(item.status || "")}</span>
+              </div>
+              <p class="mb-3">${escapeHtml(item.description || item.summary || "")}</p>
+              <p class="mb-3"><strong>Current role/status:</strong> ${escapeHtml(item.role || item.status || "")}</p>
+              <div class="mt-auto">
+                <a href="${escapeHtml(item.link || item.url || "#")}" class="btn btn-outline-primary btn-sm">View Venture</a>
+              </div>
             </div>
-            <p class="mb-3">${escapeHtml(item.description || item.summary || "Description placeholder.")}</p>
-            <p class="mb-3"><strong>Current role/status:</strong> ${escapeHtml(item.role || item.status || "Placeholder")}</p>
-            <div class="mt-auto">
-              <a href="${escapeHtml(item.link || item.url || "#")}" class="btn btn-outline-primary btn-sm">View Venture</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    `).join("");
+          </article>
+        </div>
+      `;
+    }).join("");
   }
 
   function renderKomPrompts(komConfig) {
@@ -420,105 +637,133 @@
     });
   }
 
-  async function renderIndexPage() {
-    const data = await loadSources(["profile", "homepage", "projects", "contact"]);
-    const profile = asObject(data.profile);
-    const homepage = asObject(data.homepage);
-    const contact = asObject(data.contact);
+  function renderIndexPage(siteContent) {
+    const profile = asObject(siteContent.profile);
+    const homepage = asObject(siteContent.homepage);
+    const contact = asObject(siteContent.contact);
+    const timeline = ensureArray(siteContent.timeline);
+    const notes = ensureArray(siteContent.notes);
+    const skills = ensureArray(siteContent.skills);
+    const socialLinks = ensureArray(siteContent.social_links);
+    const ventures = ensureArray(siteContent.ventures);
     const profileContacts = asObject(profile.contacts);
-    const hero = asObject(homepage.hero);
-    const focusAreas = ensureArray(profile.focus_areas);
-    const interests = ensureArray(profile.interests);
-    const primaryFocus = focusAreas.length ? focusAreas.slice(0, 2).join(" / ") : "Electric Vehicle Technology / Embedded Systems";
-    const domainFocus = interests.length ? interests.slice(0, 3).join(", ") : "Engineering, Knowledge, Ventures";
-    const location = profile.location || contact.location || "Indonesia";
-    const role = profile.role || profile.headline || "Engineer";
-    const email = profileContacts.email || contact.email || "hello@example.com";
-    const collaboration = contact.availability || "Open for collaboration";
-    const heroTitle = homepage.hero_title || hero.title || "";
-    const heroSubtitle = homepage.hero_subtitle || hero.subtitle || "";
-    const heroNote = heroSubtitle && normalize(heroSubtitle) !== normalize(role)
-      ? heroSubtitle
-      : "Personal website and knowledge archive built in iterative phases.";
+    const primaryFocus = String(profile.primary_focus || "").trim();
+    const domainFocus = String(profile.domain_focus || "").trim();
+    const location = String(profile.location || "").trim();
+    const role = String(profile.role || "").trim();
+    const email = String(profileContacts.email || profile.email || "").trim();
+    const collaboration = String(profile.collaboration || "").trim();
+    const educationInstitution = String(profile.education_institution || "").trim();
+    const educationDegree = String(profile.education_degree || "").trim();
+    const educationPeriod = String(profile.education_period || "").trim();
+    const educationLine = educationInstitution || educationDegree || educationPeriod
+      ? `${educationInstitution} - ${educationDegree} (${educationPeriod})`
+      : "";
+    const heroTitle = String(homepage.hero_title || profile.name || "").trim();
+    const heroSubtitle = String(homepage.hero_subtitle || role || profile.headline || "").trim();
+    const heroNote = String(homepage.hero_note || "").trim();
 
     setSiteName(profile.name);
-    setProfileImages(profile.profile_image || "");
+    setProfileImages(profile.profile_image_path || profile.profile_image || "");
+    renderSocialLinks(socialLinks, null, { clearIfEmpty: true });
     renderHomeImages(homepage, profile);
-    setText("home-hero-title", profile.name || heroTitle || "Hero / Introduction");
-    setText("home-hero-subtitle", role || heroSubtitle || "Homepage subtitle from unified data.");
+    setText("home-hero-title", heroTitle);
+    setText("home-hero-subtitle", heroSubtitle);
     setText("home-hero-note", heroNote);
-    setText("home-profile-headline", profile.headline || "Builder, Research-Oriented Learner, and Systems Thinker");
-    setText("home-identity-snapshot", homepage.identity_snapshot || profile.summary || profile.bio || "Identity snapshot placeholder from unified data.");
+    setText("home-profile-headline", profile.headline || "");
+    setText("home-identity-snapshot", profile.summary || profile.bio || homepage.identity_snapshot || "");
     setText("home-primary-focus", primaryFocus);
     setText("home-domain-focus", domainFocus);
     setText("home-current-role", role);
     setText("home-location", location);
     setText("home-collaboration", collaboration);
-    setLink("home-email-link", `mailto:${email}`, email);
-    setText("home-identity-note", `Education: ${(ensureArray(profile.education)[0] || {}).institution || "Institution"} - ${(ensureArray(profile.education)[0] || {}).degree || "Degree"} (${(ensureArray(profile.education)[0] || {}).period || "Period"})`);
-    renderIdentitySkills(profile);
+    setLink("home-email-link", email ? `mailto:${email}` : "#", email);
+    setText("home-identity-note", educationLine ? `Education: ${educationLine}` : "");
+    renderIdentitySkills(skills);
+    setText("home-kom-intro", homepage.kom_intro || "");
+    renderHomeFeaturedProjects(homepage);
+    renderHomeNotes(notes);
+    renderHomeTimeline(timeline);
+    renderHomeVenturesPreview(ventures);
     renderHomeContact(contact, profileContacts, location);
-    setText("home-kom-intro", homepage.kom_intro || "KOM introduction from unified data source.");
-
-    renderHomeFeaturedProjects(homepage, data.projects);
   }
 
-  async function renderProjectsPage() {
-    const data = await loadSources(["profile", "projects", "knowledge"]);
-    const profile = asObject(data.profile);
-    setSiteName(profile.name);
-    setProfileImages(profile.profile_image || "");
+  function renderProjectsPage(siteContent) {
+    const profile = asObject(siteContent.profile);
+    const projects = ensureArray(siteContent.projects);
+    const knowledge = ensureArray(siteContent.knowledge);
+    const socialLinks = ensureArray(siteContent.social_links);
 
-    const knowledgeMap = ensureArray(data.knowledge).reduce((acc, item) => {
+    setSiteName(profile.name);
+    setProfileImages(profile.profile_image_path || profile.profile_image || "");
+    renderSocialLinks(socialLinks, null, { clearIfEmpty: true });
+
+    const knowledgeMap = knowledge.reduce((acc, item) => {
       acc[item.id] = item;
       return acc;
     }, {});
 
-    renderProjectsArchive(data.projects, knowledgeMap);
-    renderProjectsConnected(data.projects, knowledgeMap);
+    renderProjectsArchive(projects, knowledgeMap);
+    renderProjectsConnected(projects, knowledgeMap);
   }
 
-  async function renderKnowledgePage() {
-    const data = await loadSources(["profile", "projects", "knowledge"]);
-    const profile = asObject(data.profile);
-    setSiteName(profile.name);
-    setProfileImages(profile.profile_image || "");
+  function renderKnowledgePage(siteContent) {
+    const profile = asObject(siteContent.profile);
+    const projects = ensureArray(siteContent.projects);
+    const knowledge = ensureArray(siteContent.knowledge);
+    const socialLinks = ensureArray(siteContent.social_links);
 
-    const projectMap = ensureArray(data.projects).reduce((acc, item) => {
+    setSiteName(profile.name);
+    setProfileImages(profile.profile_image_path || profile.profile_image || "");
+    renderSocialLinks(socialLinks, null, { clearIfEmpty: true });
+
+    const projectMap = projects.reduce((acc, item) => {
       acc[item.id] = item;
       return acc;
     }, {});
 
-    renderKnowledgeArchive(data.knowledge, projectMap);
-    renderKnowledgeRelated(data.knowledge, projectMap);
+    renderKnowledgeArchive(knowledge, projectMap);
+    renderKnowledgeRelated(knowledge, projectMap);
   }
 
-  async function renderVenturesPage() {
-    const data = await loadSources(["profile", "ventures"]);
-    const profile = asObject(data.profile);
+  function renderVenturesPage(siteContent) {
+    const profile = asObject(siteContent.profile);
+    const ventures = ensureArray(siteContent.ventures);
+    const socialLinks = ensureArray(siteContent.social_links);
     setSiteName(profile.name);
-    setProfileImages(profile.profile_image || "");
-    renderVentures(data.ventures);
+    setProfileImages(profile.profile_image_path || profile.profile_image || "");
+    renderSocialLinks(socialLinks, null, { clearIfEmpty: true });
+    renderVentures(ventures);
   }
 
-  async function renderKomPage() {
-    const data = await loadSources(["profile", "homepage", "kom-config"]);
-    const profile = asObject(data.profile);
-    const homepage = asObject(data.homepage);
+  function renderKomPage(siteContent) {
+    const profile = asObject(siteContent.profile);
+    const homepage = asObject(siteContent.homepage);
+    const socialLinks = ensureArray(siteContent.social_links);
 
     setSiteName(profile.name);
-    setProfileImages(profile.profile_image || "");
-    setText("kom-page-intro", homepage.kom_intro || "KOM reads projects and knowledge archives using structured metadata and relevance ranking, fully on the client-side.");
-    renderKomPrompts(data["kom-config"]);
+    setProfileImages(profile.profile_image_path || profile.profile_image || "");
+    renderSocialLinks(socialLinks, null, { clearIfEmpty: true });
+    setText("kom-page-intro", homepage.kom_intro || "");
+    renderKomPrompts(siteContent["kom-config"]);
   }
 
   async function bootstrap() {
+    let siteContent = createEmptySiteContent();
     try {
-      if (pageFlags.index) await renderIndexPage();
-      if (pageFlags.projects) await renderProjectsPage();
-      if (pageFlags.knowledge) await renderKnowledgePage();
-      if (pageFlags.ventures) await renderVenturesPage();
-      if (pageFlags.kom) await renderKomPage();
+      siteContent = await loadSiteContent();
+    } catch (error) {
+      console.error("Site content fetch failed:", error);
+    }
+
+    console.log("SITE CONTENT:", siteContent);
+
+    try {
+      if (pageFlags.index) renderIndexPage(siteContent);
+      if (pageFlags.projects) renderProjectsPage(siteContent);
+      if (pageFlags.knowledge) renderKnowledgePage(siteContent);
+      if (pageFlags.ventures) renderVenturesPage(siteContent);
+      if (pageFlags.kom) renderKomPage(siteContent);
     } catch (error) {
       console.error("Public render sync failed:", error);
     }

@@ -2,8 +2,78 @@
   "use strict";
 
   const ADAPTER = () => window.StorageAdapter;
+  const UNIFIED_ENDPOINT = "/api/site-content";
+  const UNIFIED_SOURCE_MAP = Object.freeze({
+    homepage: "homepage",
+    profile: "profile",
+    timeline: "timeline",
+    notes: "notes",
+    skills: "skills",
+    social_links: "social_links",
+    "social-links": "social_links",
+    ventures: "ventures"
+  });
+  let unifiedSiteContentPromise = null;
+
+  function isObject(value) {
+    return value && typeof value === "object" && !Array.isArray(value);
+  }
+
+  function ensureArray(value) {
+    if (Array.isArray(value)) return value;
+    if (value && Array.isArray(value.items)) return value.items;
+    return [];
+  }
+
+  function defaultUnifiedValue(source) {
+    const key = UNIFIED_SOURCE_MAP[source] || source;
+    if (key === "homepage" || key === "profile") return {};
+    return [];
+  }
+
+  async function loadUnifiedSiteContent() {
+    if (!unifiedSiteContentPromise) {
+      unifiedSiteContentPromise = fetch(UNIFIED_ENDPOINT, {
+        credentials: "same-origin",
+        cache: "no-store"
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to load unified site content (${response.status})`);
+          }
+          return response.json();
+        })
+        .then((payload) => (isObject(payload) ? payload : {}))
+        .catch((error) => {
+          unifiedSiteContentPromise = null;
+          throw error;
+        });
+    }
+    return unifiedSiteContentPromise;
+  }
+
+  async function loadUnifiedSource(source) {
+    const key = UNIFIED_SOURCE_MAP[source];
+    if (!key) return null;
+
+    try {
+      const payload = await loadUnifiedSiteContent();
+      const value = payload[key];
+      if (key === "homepage" || key === "profile") {
+        return isObject(value) ? value : {};
+      }
+      return ensureArray(value);
+    } catch (error) {
+      console.warn(`Unified source fetch failed for ${source}.`, error);
+      return defaultUnifiedValue(source);
+    }
+  }
 
   async function loadSource(source) {
+    if (Object.prototype.hasOwnProperty.call(UNIFIED_SOURCE_MAP, source)) {
+      return loadUnifiedSource(source);
+    }
+
     if (ADAPTER() && typeof ADAPTER().getData === "function") {
       return ADAPTER().getData(source);
     }
@@ -44,6 +114,14 @@
     return loadSource("notes");
   }
 
+  async function loadSkills() {
+    return loadSource("skills");
+  }
+
+  async function loadSocialLinks() {
+    return loadSource("social_links");
+  }
+
   async function loadReviews() {
     return loadSource("reviews");
   }
@@ -59,7 +137,20 @@
   async function loadAllData(sources) {
     const sourceList = Array.isArray(sources) && sources.length
       ? sources
-      : ["profile", "homepage", "projects", "knowledge", "ventures", "timeline", "notes", "reviews", "contact", "kom-config"];
+      : [
+          "profile",
+          "homepage",
+          "projects",
+          "knowledge",
+          "ventures",
+          "timeline",
+          "notes",
+          "skills",
+          "social_links",
+          "reviews",
+          "contact",
+          "kom-config"
+        ];
 
     const entries = await Promise.all(
       sourceList.map(async(source) => {
@@ -81,6 +172,8 @@
     loadVentures,
     loadTimeline,
     loadNotes,
+    loadSkills,
+    loadSocialLinks,
     loadReviews,
     loadContact,
     loadKomConfig
