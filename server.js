@@ -45,6 +45,15 @@ const forceSecureCookie =
   String(process.env.NODE_ENV || "").toLowerCase() === "production";
 
 const sessions = new Map();
+
+// --- Admin login rate limiting (in-memory, no external deps) ---
+const loginRateLimit = {
+  windowMs: Number(process.env.ADMIN_LOGIN_WINDOW_MS || 10 * 60 * 1000), // 10 menit
+  maxFailures: Number(process.env.ADMIN_LOGIN_MAX_FAILURES || 5),
+  lockMs: Number(process.env.ADMIN_LOGIN_LOCK_MS || 15 * 60 * 1000) // 15 menit
+};
+const loginAttempts = new Map(); // key (IP) -> { failures, firstAt, lockUntil }
+
 const dbPool = process.env.DATABASE_URL
   ? new Pool({ connectionString: process.env.DATABASE_URL })
   : null;
@@ -199,6 +208,53 @@ function cleanupSessions() {
       sessions.delete(sid);
     }
   }
+}
+
+function loginRateKey(req) {
+  return getClientIp(req) || "unknown";
+}
+
+// Hapus entry yang lock-nya sudah lewat dan window-nya sudah kedaluwarsa.
+function cleanupLoginAttempts() {
+  const now = Date.now();
+  for (const [key, entry] of loginAttempts.entries()) {
+    const lockExpired = !entry.lockUntil || entry.lockUntil <= now;
+    const windowExpired = !entry.firstAt || now - entry.firstAt > loginRateLimit.windowMs;
+    if (lockExpired && windowExpired) {
+      loginAttempts.delete(key);
+    }
+  }
+}
+
+// Mengembalikan sisa detik lock bila sedang terkunci, selain itu null.
+function getLoginLockSeconds(req) {
+  cleanupLoginAttempts();
+  const entry = loginAttempts.get(loginRateKey(req));
+  if (!entry || !entry.lockUntil) return null;
+  const now = Date.now();
+  if (entry.lockUntil > now) {
+    return Math.ceil((entry.lockUntil - now) / 1000);
+  }
+  return null;
+}
+
+function registerLoginFailure(req) {
+  const key = loginRateKey(req);
+  const now = Date.now();
+  let entry = loginAttempts.get(key);
+  // Reset window bila sudah kedaluwarsa dan tidak sedang terkunci.
+  if (!entry || (now - entry.firstAt > loginRateLimit.windowMs && !(entry.lockUntil && entry.lockUntil > now))) {
+    entry = { failures: 0, firstAt: now, lockUntil: 0 };
+  }
+  entry.failures += 1;
+  if (entry.failures >= loginRateLimit.maxFailures) {
+    entry.lockUntil = now + loginRateLimit.lockMs;
+  }
+  loginAttempts.set(key, entry);
+}
+
+function clearLoginFailures(req) {
+  loginAttempts.delete(loginRateKey(req));
 }
 
 function createSession(user) {
@@ -1941,6 +1997,17 @@ async function handleLogin(req, res) {
     return;
   }
 
+  const lockSeconds = getLoginLockSeconds(req);
+  if (lockSeconds) {
+    sendJson(
+      res,
+      429,
+      { ok: false, error: "Terlalu banyak percobaan login. Coba lagi nanti." },
+      { "retry-after": String(lockSeconds) }
+    );
+    return;
+  }
+
   if (!dbPool) {
     sendJson(res, 500, { ok: false, error: "Database not configured" });
     return;
@@ -1984,6 +2051,7 @@ async function handleLogin(req, res) {
         status: "failed",
         message: "Username tidak ditemukan"
       });
+      registerLoginFailure(req);
       sendJson(res, 401, { ok: false, error: "Username atau password tidak valid" });
       return;
     }
@@ -1999,6 +2067,7 @@ async function handleLogin(req, res) {
         status: "failed",
         message: "Password hash kosong"
       });
+      registerLoginFailure(req);
       sendJson(res, 401, { ok: false, error: "Username atau password tidak valid" });
       return;
     }
@@ -2013,6 +2082,7 @@ async function handleLogin(req, res) {
         status: "failed",
         message: "Password tidak valid"
       });
+      registerLoginFailure(req);
       sendJson(res, 401, { ok: false, error: "Username atau password tidak valid" });
       return;
     }
@@ -2030,6 +2100,7 @@ async function handleLogin(req, res) {
       return;
     }
 
+    clearLoginFailures(req);
     const { sid, expiresAt } = createSession(user);
     const secureCookie = forceSecureCookie || isSecureRequest(req);
     const setCookie = serializeCookie(sessionCookieName, sid, {

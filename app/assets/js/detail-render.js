@@ -383,7 +383,22 @@
 
       setText("detail-page-title", item.title || (pageType === "project" ? "Project Detail" : "Knowledge Detail"));
       setText("detail-breadcrumb-current", item.title || "Detail");
-      document.title = (item.title || "Detail") + " - rasyid-puteraa.my.id";
+      const detailTitle = (item.title || "Detail") + " — Muhammad Rasyid Putera Agung";
+      document.title = detailTitle;
+      // Perbarui canonical & OG/Twitter agar sesuai item yang sedang dibuka.
+      const canonicalUrl = window.location.href.split("#")[0];
+      const detailDesc = item.description || item.summary || "";
+      const setMeta = (selector, value) => {
+        const el = document.querySelector(selector);
+        if (el && value) el.setAttribute(el.tagName === "LINK" ? "href" : "content", value);
+      };
+      setMeta('link[rel="canonical"]', canonicalUrl);
+      setMeta('meta[property="og:url"]', canonicalUrl);
+      setMeta('meta[property="og:title"]', detailTitle);
+      setMeta('meta[name="twitter:title"]', detailTitle);
+      setMeta('meta[name="description"]', detailDesc);
+      setMeta('meta[property="og:description"]', detailDesc);
+      setMeta('meta[name="twitter:description"]', detailDesc);
 
       let likeCount = Number(item.likes) || 0;
 
