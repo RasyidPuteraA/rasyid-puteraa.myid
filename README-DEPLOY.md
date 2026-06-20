@@ -72,3 +72,24 @@ Perintah cek database:
 docker ps --filter name=rasyid-postgres
 docker exec rasyid-postgres pg_isready -U rasyid_user -d rasyid_db
 ```
+
+## 7) Backup Database
+
+Backup PostgreSQL terjadwal menggunakan script:
+[`scripts/backup-postgres.sh`](scripts/backup-postgres.sh)
+
+Panduan lengkap (manual run, integritas gzip, cron harian, restore ke DB test,
+peringatan restore production) ada di
+[`docs/backup-postgres.md`](docs/backup-postgres.md).
+
+Backup manual cepat:
+
+```bash
+cd /var/www/rasyid-puteraa/current
+bash scripts/backup-postgres.sh
+```
+
+- Default output: `/var/backups/rasyid-puteraa/postgres/` (perlu setup folder
+  sekali — lihat docs), atau override `BACKUP_DIR`.
+- Retensi default 14 hari (`RETENTION_DAYS`).
+- Tidak ada password di-hardcode; tidak mengubah schema/data; tidak me-restart service.

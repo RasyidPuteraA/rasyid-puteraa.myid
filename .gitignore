@@ -23,6 +23,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Local database backup artifacts (jangan commit dump)
+*.sql.gz
+*.dump.gz
+*.partial
+
 # Local AI agent workspace
 .codex/
 .codex
