@@ -2,6 +2,11 @@
 
 Dokumen ini menjelaskan operasional deployment website `rasyid-puteraa.my.id` di VPS.
 
+> Lihat juga: [`README.md`](README.md) (entry point) ·
+> [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) (status terkini) ·
+> [`docs/roadmap.md`](docs/roadmap.md) · [`docs/backup-postgres.md`](docs/backup-postgres.md) ·
+> [`CHANGELOG.md`](CHANGELOG.md).
+
 ## 1) Struktur Folder
 
 - `/var/www/rasyid-puteraa/current`  

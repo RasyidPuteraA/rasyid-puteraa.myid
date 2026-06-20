@@ -2,11 +2,15 @@ Dokumen ini berfungsi sebagai acuan utama Codex dan development project, supaya 
 
 Project Charter
 
-mrasyid-puteraa.com
+rasyid-puteraa.my.id
+
+> Catatan (Juni 2026): domain resmi & live adalah **rasyid-puteraa.my.id**.
+> Penyebutan "mrasyid-puteraa.com" pada versi awal dokumen sudah tidak berlaku.
+> Konsep & filosofi di bawah ini tetap dipertahankan tanpa perubahan.
 
 1. Project Overview
 
-mrasyid-puteraa.com adalah website personal profesional yang berfungsi sebagai pusat identitas, arsip karya, pengetahuan, dan perjalanan hidup Muhammad Rasyid Putera Agung.
+rasyid-puteraa.my.id adalah website personal profesional yang berfungsi sebagai pusat identitas, arsip karya, pengetahuan, dan perjalanan hidup Muhammad Rasyid Putera Agung.
 
 Website ini tidak hanya berfungsi sebagai portfolio, tetapi berkembang menjadi arsip pengetahuan personal yang hidup (living knowledge archive) yang mendokumentasikan karya, pengalaman, pemikiran, dan pembelajaran sepanjang waktu.
 

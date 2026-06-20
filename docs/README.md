@@ -1,20 +1,16 @@
-README ini akan menjadi panduan utama saat:
+# rasyid-puteraa.my.id — Konsep & Filosofi
 
-membuka project di VSCode
-
-menjalankan preview di localhost
-
-memberi konteks ke Codex
-
-menyiapkan migrasi ke VPS nanti
-
-Berikut isi yang rapi dan siap pakai.
-
-# mrasyid-puteraa.com
+> Dokumen ini menjelaskan **konsep, visi, dan filosofi** website (sengaja
+> dipertahankan dari desain awal). Untuk status teknis terkini lihat
+> [`PROJECT_STATUS.md`](PROJECT_STATUS.md), arah pengembangan di
+> [`roadmap.md`](roadmap.md), dan entry point repo di [`../README.md`](../README.md).
+>
+> **Status (Juni 2026):** website sudah **live di production** pada domain
+> `rasyid-puteraa.my.id` (Node.js + PM2 + Nginx + Cloudflare Tunnel + PostgreSQL).
+> Narasi awal "dikembangkan lokal di laptop Windows / migrasi ke VPS nanti" sudah
+> tidak berlaku dan dibiarkan hanya sebagai konteks sejarah.
 
 Website personal profesional yang berfungsi sebagai portfolio, knowledge archive, dokumentasi perjalanan, dan fondasi sistem eksplorasi pengetahuan bernama **KOM**.
-
-Project ini dikembangkan terlebih dahulu secara lokal di laptop Windows menggunakan **VSCode + Codex**, lalu disiapkan agar mudah dipindahkan ke VPS di masa depan.
 
 ---
 
@@ -62,16 +58,14 @@ Bukan berarti menghapus ingatan secara literal, tetapi membongkar, menguji, dan 
 
 ## Development Status
 
-Saat ini project berada pada tahap:
+Website sudah **live di production**. Fase yang sudah selesai:
 
-**Phase 1 — Foundation**
+- **Phase 1** — branding cleanup, domain `rasyid-puteraa.my.id`, cleanup template.
+- **Runtime baseline** — `server.js`, `lib/`, `scripts/`, `package.json`, ecosystem, deploy docs masuk Git.
+- **Phase 2** — admin login rate-limit, SEO/OG/Twitter card, JSON-LD Person, contact flow cleanup.
+- **Phase 3A** — script backup PostgreSQL + docs, backup manual & restore test berhasil, cron 02:30 aktif.
 
-Fokus saat ini:
-- setup struktur project
-- adaptasi template iPortfolio
-- local preview di localhost
-- persiapan homepage dan archive structure
-- dokumentasi project untuk Codex
+Snapshot teknis terkini: [`PROJECT_STATUS.md`](PROJECT_STATUS.md) · Prioritas berikutnya: [`roadmap.md`](roadmap.md).
 
 ---
 
@@ -260,23 +254,16 @@ Phase 5 — KOM AI
 
 Pengembangan simple AI knowledge assistant.
 
-Migration Goal
+Deployment (sudah berjalan di production)
 
-Struktur project ini dirancang agar mudah dipindahkan dari laptop ke VPS.
+Project sudah dideploy ke VPS. Lokasi production saat ini:
 
-Prinsip utamanya:
+/var/www/rasyid-puteraa/current/   # source aktif (dijalankan PM2 sebagai "rasyid-puteraa")
+/var/www/rasyid-puteraa/shared/    # .env, uploads, logs, docker-compose.db.yml
 
-source aktif berada di app/
-
-asset path bersifat relatif
-
-tidak tergantung pada path lokal Windows
-
-folder app/ nantinya dapat dipindahkan ke server web dengan minim perubahan
-
-Contoh target deploy di VPS:
-
-/var/www/mrasyid-puteraa.com/
+Prinsip yang tetap dipertahankan: source aktif di `app/`, asset path relatif, tidak
+bergantung path lokal Windows. Detail operasional ada di
+[`../README-DEPLOY.md`](../README-DEPLOY.md).
 Main Documentation
 
 Baca file berikut sebelum development lanjutan:

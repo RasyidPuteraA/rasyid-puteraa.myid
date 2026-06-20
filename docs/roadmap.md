@@ -1,193 +1,64 @@
-Dokumen ini menjelaskan tahapan perkembangan website dari awal sampai implementasi KOM AI, sehingga Codex dan kamu selalu punya arah development yang jelas.
+# Roadmap — rasyid-puteraa.my.id
 
-Roadmap Development
+> Domain resmi: **rasyid-puteraa.my.id** (live di production).
+> Dokumen ini menggabungkan **prioritas pengembangan terkini** dengan **visi
+> produk jangka panjang (KOM)** yang dipertahankan dari desain awal.
 
-mrasyid-puteraa.com
+## Konsep yang dipertahankan
 
-Overview
+**Engineering Portfolio & Living Knowledge Archive** — website ini bukan sekadar
+CV, melainkan arsip project, pengetahuan, perjalanan, *venture gateway*, dan
+fondasi sistem eksplorasi pengetahuan **KOM**. KOM tetap menjadi visi jangka
+panjang, **bukan** prioritas dekat.
 
-Roadmap ini menjelaskan tahapan pengembangan website dari fase awal sebagai portfolio sederhana hingga berkembang menjadi sistem arsip pengetahuan dengan fitur pencarian dan AI melalui sistem KOM.
+Fokus publik terdekat: **portfolio engineering, featured projects, knowledge
+archive, dan kredibilitas project**.
 
-Pengembangan dilakukan secara bertahap agar sistem tetap stabil, mudah dikembangkan, dan tidak terlalu kompleks di tahap awal.
+---
 
-Phase 1 — Website Foundation
+## Prioritas Pengembangan
 
-Tahap pertama adalah membangun fondasi website menggunakan template yang ada dan menyesuaikannya dengan identitas personal.
+### 🟢 Near-term (sekarang)
+Mempertajam kualitas publik & menutup utang operasional ringan.
 
-Tujuan
+- [ ] **Update hero live via admin** — ganti teks hero produksi (sumber DB)
+  melalui admin panel agar konsisten dengan positioning baru.
+- [ ] **Kurasi featured projects** — pilih 6–8 project terbaik dari arsip,
+  lengkapi hasil/metrik & media.
+- [ ] **Cleanup profile placeholder** — isi telepon/email/role yang masih
+  placeholder (`hello@example.com`, `+62-8xx`, "Placeholder Role") via admin.
+- [ ] **GitHub Issues / task tracking** — gunakan Issues + template task sebagai
+  task memory (lihat [`DECISIONS.md`](DECISIONS.md)).
+- [ ] **Contact endpoint Node** — ganti form `mailto:` dengan `POST /api/contact`
+  (rate-limit + anti-spam), tanpa membangun sistem email berat.
+- [ ] **Backup monitoring** — verifikasi cron 02:30 berjalan, cek umur/ukuran
+  file backup, notifikasi bila gagal.
 
-Membuat website portfolio dasar yang dapat berjalan secara lokal dan menampilkan identitas profesional.
+### 🟡 Mid-term
+Maintainability & kualitas produk.
 
-Target
+- [ ] **Refactor `server.js` bertahap** — pecah monolith ke modul `routes/`
+  tanpa rewrite framework.
+- [ ] **Project detail polish** — tampilan, media, related content.
+- [ ] **SEO / prerender improvement** — perbaiki konten yang dirender JS agar
+  terbaca crawler (mis. prerender/SSR ringan untuk halaman utama).
+- [ ] **Admin UX improvement** — kemudahan editing konten & media.
 
-Website berjalan di localhost
+### 🔵 Later (visi jangka panjang — KOM)
+Jangan diprioritaskan sebelum Near/Mid stabil.
 
-Struktur project rapi
+- [ ] **KOM smart search** — internal full-text search lintas project & knowledge.
+- [ ] **KOM AI assistant** — natural language query + knowledge synthesis.
+- [ ] **Live project dashboard integration** — embed monitoring (mis. SAKMONITOR/IoT)
+  sebagai technical showcase.
 
-Template berhasil diadaptasi
+---
 
-Fitur utama
+## Visi Produk Jangka Panjang (KOM)
 
-Homepage
+Evolusi sistem (mind map, bukan timeline tanggal):
 
-About / Profile
-
-Project portfolio
-
-Contact
-
-Task
-
-Setup environment development di laptop
-
-Integrasi template iPortfolio
-
-Penyesuaian homepage
-
-Penyesuaian identitas personal
-
-Struktur folder project rapi
-
-Phase 2 — Content Archive
-
-Website mulai berkembang dari portfolio menjadi arsip konten.
-
-Tujuan
-
-Menambahkan konten yang mendokumentasikan karya dan pembelajaran.
-
-Target
-
-Website mulai berfungsi sebagai arsip pengetahuan personal.
-
-Fitur utama
-
-Halaman project detail
-
-Halaman knowledge
-
-Halaman review
-
-Halaman timeline
-
-Task
-
-Dokumentasi project engineering
-
-Menambahkan artikel
-
-Menambahkan review buku/jurnal
-
-Menambahkan catatan pembelajaran
-
-Menambahkan timeline perjalanan
-
-Phase 3 — Structured Knowledge
-
-Tahap ini fokus pada pengorganisasian konten.
-
-Tujuan
-
-Membuat konten lebih terstruktur dan mudah dieksplorasi.
-
-Target
-
-Website menjadi knowledge base personal.
-
-Fitur utama
-
-kategori konten
-
-tagging system
-
-relasi antar konten
-
-dokumentasi yang lebih terstruktur
-
-Task
-
-sistem kategori
-
-sistem tag
-
-relasi project dengan artikel
-
-relasi knowledge dengan project
-
-navigasi archive yang lebih baik
-
-Phase 4 — KOM Search System
-
-Tahap ini memperkenalkan sistem eksplorasi pengetahuan melalui KOM Search.
-
-Tujuan
-
-Memungkinkan pengunjung mencari konten di seluruh arsip website.
-
-Target
-
-Website memiliki internal knowledge search engine.
-
-Fitur utama
-
-pencarian artikel
-
-pencarian project
-
-pencarian knowledge
-
-pencarian dokumen
-
-Task
-
-indexing konten website
-
-implementasi search interface
-
-integrasi search dengan halaman archive
-
-menampilkan hasil pencarian terstruktur
-
-Phase 5 — KOM AI
-
-Tahap ini adalah pengembangan jangka panjang.
-
-Tujuan
-
-Mengembangkan KOM menjadi AI knowledge assistant.
-
-Target
-
-Pengunjung dapat bertanya kepada sistem untuk memahami arsip pengetahuan.
-
-Fitur utama
-
-natural language query
-
-AI response
-
-knowledge synthesis
-
-rekomendasi konten terkait
-
-Task
-
-integrasi AI model
-
-retrieval dari knowledge archive
-
-sistem prompt AI
-
-interface Ask KOM
-
-Homepage Roadmap Section
-
-Homepage website juga menampilkan visual roadmap evolusi website.
-
-Roadmap ini tidak ditampilkan sebagai timeline tanggal, tetapi sebagai mind map perkembangan sistem.
-
-Struktur visual:
-
+```
 Website Foundation
       ↓
 Content Archive
@@ -197,21 +68,17 @@ Structured Knowledge
 KOM Search System
       ↓
 KOM AI
+```
 
-Roadmap ini menunjukkan bahwa website adalah project yang terus berkembang.
+**Makna KOM — "Kill of Memory":** bukan menghapus ingatan, melainkan membongkar,
+menguji, dan memahami ulang ingatan, pengalaman, dan pengetahuan agar maknanya
+lebih dalam dan tidak diterima mentah sebagai kebenaran absolut.
 
-Long-Term Vision
+Dalam jangka panjang website ini diharapkan menjadi: portfolio profesional, arsip
+pengetahuan personal, dokumentasi perjalanan, pusat publikasi karya, dan sistem
+eksplorasi pengetahuan melalui KOM — sebuah **living archive** yang terus
+berkembang.
 
-Dalam jangka panjang, website ini diharapkan menjadi:
-
-portfolio profesional
-
-arsip pengetahuan personal
-
-dokumentasi perjalanan hidup
-
-pusat publikasi karya
-
-sistem eksplorasi pengetahuan melalui KOM
-
-Website ini akan menjadi living archive yang terus berkembang seiring waktu.
+> Catatan: rincian fase produk awal (Foundation → Content Archive → Structured
+> Knowledge → KOM Search → KOM AI) ada di histori commit dan dokumen fase
+> `docs/phase-*.md` sebagai konteks sejarah.
