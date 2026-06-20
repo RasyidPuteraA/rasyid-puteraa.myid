@@ -12,8 +12,6 @@
 
   if (!pageType) return;
 
-  const likeStorageKey = "mrp_detail_likes_v1";
-
   function byId(id) {
     return document.getElementById(id);
   }
@@ -56,6 +54,31 @@
     document.querySelectorAll(".profile-img img").forEach(function(img) {
       img.setAttribute("src", resolved);
     });
+  }
+
+  function iconClassByPlatform(platform) {
+    const key = String(platform || "").toLowerCase().trim();
+    if (key === "linkedin") return "bi-linkedin";
+    if (key === "github") return "bi-github";
+    if (key === "instagram") return "bi-instagram";
+    if (key === "youtube") return "bi-youtube";
+    if (key === "twitter" || key === "x") return "bi-twitter-x";
+    if (key === "facebook") return "bi-facebook";
+    return "bi-link-45deg";
+  }
+
+  function renderSocialLinks(profile) {
+    const container = document.querySelector(".social-links");
+    if (!container) return;
+    const links = ensureArray(profile && profile.social_links ? profile.social_links : []);
+    if (!links.length) return;
+
+    container.innerHTML = links.map(function(item) {
+      const platform = item && (item.platform || item.name) ? String(item.platform || item.name) : "link";
+      const url = item && item.url ? String(item.url) : "#";
+      const icon = iconClassByPlatform(platform);
+      return '<a href=\"' + escapeHtml(url) + '\" class=\"' + escapeHtml(platform.toLowerCase()) + '\" target=\"_blank\" rel=\"noopener noreferrer\"><i class=\"bi ' + escapeHtml(icon) + '\"></i></a>';
+    }).join("");
   }
 
   function formatDate(value) {
@@ -138,40 +161,32 @@
     }).join("");
   }
 
-  function readLikesMap() {
+  function likeEndpoint(itemId) {
+    if (pageType === "project") {
+      return "/api/projects/" + encodeURIComponent(itemId) + "/like";
+    }
+    return "/api/articles/" + encodeURIComponent(itemId) + "/like";
+  }
+
+  async function incrementLikeOnServer(itemId) {
+    const response = await fetch(likeEndpoint(itemId), {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      credentials: "same-origin"
+    });
+
+    let payload = null;
     try {
-      const raw = localStorage.getItem(likeStorageKey);
-      if (!raw) return {};
-      const parsed = JSON.parse(raw);
-      return parsed && typeof parsed === "object" ? parsed : {};
+      payload = await response.json();
     } catch (error) {
-      return {};
+      payload = null;
     }
-  }
 
-  function saveLikesMap(map) {
-    try {
-      localStorage.setItem(likeStorageKey, JSON.stringify(map));
-    } catch (error) {
-      // ignore write errors in strict browser settings
+    if (!response.ok) {
+      throw new Error((payload && payload.error) || "Failed to register like.");
     }
-  }
 
-  function getLikeCount(entryKey, baseLikes) {
-    const likesMap = readLikesMap();
-    const stored = Number(likesMap[entryKey]);
-    if (Number.isFinite(stored)) {
-      return Math.max(Number(baseLikes) || 0, stored);
-    }
-    return Number(baseLikes) || 0;
-  }
-
-  function incrementLike(entryKey, currentCount) {
-    const likesMap = readLikesMap();
-    const next = (Number(currentCount) || 0) + 1;
-    likesMap[entryKey] = next;
-    saveLikesMap(likesMap);
-    return next;
+    return Number(payload && payload.likes ? payload.likes : 0);
   }
 
   function renderNotFound() {
@@ -342,6 +357,7 @@
 
       setSiteName(profile.name);
       setProfileImages(profile.profile_image || "");
+      renderSocialLinks(profile);
 
       const projectMap = projects.reduce(function(acc, item) {
         acc[item.id] = item;
@@ -367,10 +383,9 @@
 
       setText("detail-page-title", item.title || (pageType === "project" ? "Project Detail" : "Knowledge Detail"));
       setText("detail-breadcrumb-current", item.title || "Detail");
-      document.title = (item.title || "Detail") + " - mrasyid-puteraa.com";
+      document.title = (item.title || "Detail") + " - rasyid-puteraa.my.id";
 
-      const likeKey = pageType + ":" + item.id;
-      let likeCount = getLikeCount(likeKey, item.likes);
+      let likeCount = Number(item.likes) || 0;
 
       const relatedHtml = pageType === "project"
         ? renderRelatedEntries(item.related_knowledge, knowledgeMap, "knowledge")
@@ -381,10 +396,17 @@
       const likeBtn = byId("detail-like-btn");
       const likeCountEl = byId("detail-like-count");
       if (likeBtn && likeCountEl) {
-        likeBtn.addEventListener("click", function() {
-          likeCount = incrementLike(likeKey, likeCount);
-          likeCountEl.textContent = String(likeCount);
-          setActionStatus("Thanks, your like is saved in local browser.", "info");
+        likeBtn.addEventListener("click", async function() {
+          try {
+            likeBtn.disabled = true;
+            likeCount = await incrementLikeOnServer(item.id);
+            likeCountEl.textContent = String(likeCount);
+            setActionStatus("Thanks, your like was saved.", "info");
+          } catch (error) {
+            setActionStatus(error.message || "Failed to save like.", "error");
+          } finally {
+            likeBtn.disabled = false;
+          }
         });
       }
 

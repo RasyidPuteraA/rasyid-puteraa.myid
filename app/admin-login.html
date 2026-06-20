@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Master Admin Login - mrasyid-puteraa.com</title>
-  <meta content="Prototype login page for local master admin access." name="description">
-  <meta content="admin, login, prototype, local" name="keywords">
+  <title>Master Admin Login - rasyid-puteraa.my.id</title>
+  <meta content="Secure master admin login page." name="description">
+  <meta content="admin, login, master" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://res.cloudinary.com/dnrhe2mjz/image/upload/v1776713302/ChatGPT_Image_Mar_11_2026_03_22_35_PM_gbpfhi.png?v=20260421-tab-icon" rel="icon">
+  <link href="assets/img/my-profile-img.jpg" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -36,9 +36,9 @@
             <div class="card border-0 shadow-sm admin-card admin-login-card">
               <div class="card-body p-4 p-lg-5">
                 <div class="text-center mb-4">
-                  <span class="badge border text-dark admin-login-badge">Prototype Local Mode</span>
+                  <span class="badge border text-dark admin-login-badge">Secure Backend Auth</span>
                   <h1 class="h3 mt-3 mb-2">Master Admin Login</h1>
-                  <p class="admin-login-subtitle mb-0">Akses ini hanya untuk manajemen internal lokal pada fase pengembangan.</p>
+                  <p class="admin-login-subtitle mb-0">Akses ini hanya untuk akun master yang tersimpan di database.</p>
                 </div>
 
                 <form id="admin-login-form" novalidate>
@@ -67,9 +67,7 @@
               </div>
             </div>
 
-            <p class="admin-help-text text-center mt-3 mb-0">
-              Gunakan kredensial master yang dikonfigurasi di <code>assets/js/admin-auth.js</code>.
-            </p>
+            <p class="admin-help-text text-center mt-3 mb-0">Gunakan kredensial akun master dari database production.</p>
           </div>
         </div>
       </div>
@@ -80,7 +78,7 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Admin Auth JS -->
-  <script src="assets/js/admin-auth.js"></script>
+  <script src="assets/js/admin-auth.js?v=20260310-1"></script>
 </body>
 
 </html>

@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Master Admin Dashboard - mrasyid-puteraa.com</title>
+  <title>Master Admin Dashboard - rasyid-puteraa.my.id</title>
   <meta content="Local admin dashboard for managing unified website data architecture." name="description">
   <meta content="admin, dashboard, data editor, local storage" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://res.cloudinary.com/dnrhe2mjz/image/upload/v1776713302/ChatGPT_Image_Mar_11_2026_03_22_35_PM_gbpfhi.png?v=20260421-tab-icon" rel="icon">
+  <link href="assets/img/my-profile-img.jpg" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -32,7 +32,7 @@
     <aside class="admin-sidebar">
       <div class="admin-sidebar-brand">
         <h1 class="h4 mb-1">Master Admin</h1>
-        <p class="mb-0">mrasyid-puteraa.com</p>
+        <p class="mb-0">rasyid-puteraa.my.id</p>
       </div>
 
       <nav class="admin-sidebar-nav">
@@ -42,6 +42,7 @@
         <a class="admin-nav-link" href="#module-projects"><i class="bi bi-kanban"></i>Projects</a>
         <a class="admin-nav-link" href="#module-knowledge"><i class="bi bi-journal-bookmark"></i>Knowledge</a>
         <a class="admin-nav-link" href="#module-ventures"><i class="bi bi-briefcase"></i>Ventures</a>
+        <a class="admin-nav-link" href="#module-spotify"><i class="bi bi-spotify"></i>Spotify</a>
         <a class="admin-nav-link" href="#module-kom-config"><i class="bi bi-sliders"></i>KOM Config</a>
       </nav>
 
@@ -68,13 +69,13 @@
                   </p>
                 </div>
                 <div class="admin-dashboard-meta">
-                  <span class="badge text-bg-light border text-dark">LocalStorage Mode</span>
-                  <span class="badge text-bg-light border text-dark">No Backend</span>
+                  <span class="badge text-bg-light border text-dark">PostgreSQL Mode</span>
+                  <span class="badge text-bg-light border text-dark">API Connected</span>
                 </div>
               </div>
               <p class="admin-panel-note mb-0 mt-3">
-                Perubahan pada panel ini disimpan lokal di browser. Klik <strong>Reset to Default</strong> pada modul tertentu
-                untuk kembali ke data JSON default di folder <code>/data</code>.
+                Perubahan pada panel ini langsung disimpan ke PostgreSQL melalui API. Tombol <strong>Reset dari Template</strong>
+                akan memuat ulang template JSON default lalu menyimpannya kembali ke database.
               </p>
             </div>
           </div>
@@ -91,7 +92,7 @@
                 <h3 class="h5 mb-1">Profile Editor</h3>
                 <div class="admin-form-actions">
                   <button id="profile-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="profile-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="profile-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="profile-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -133,6 +134,10 @@
                   <label for="profile-interests" class="form-label">Interests (one item per line)</label>
                   <textarea id="profile-interests" class="form-control" rows="5" placeholder="Knowledge Systems&#10;Product Development"></textarea>
                 </div>
+                <div class="col-12">
+                  <label for="profile-social-links" class="form-label">Social Links (format per line: platform | url)</label>
+                  <textarea id="profile-social-links" class="form-control" rows="4" placeholder="linkedin | https://linkedin.com/in/username&#10;github | https://github.com/username"></textarea>
+                </div>
               </form>
             </div>
           </article>
@@ -144,10 +149,10 @@
           <article class="card border-0 shadow-sm admin-module-card mb-4">
             <div class="card-body">
               <div class="admin-module-header">
-                <h3 class="h5 mb-1">Homepage Editor</h3>
+                <h3 class="h5 mb-1">Homepage Settings Editor</h3>
                 <div class="admin-form-actions">
                   <button id="homepage-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="homepage-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="homepage-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="homepage-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -211,7 +216,7 @@
                 <h3 class="h5 mb-1">Projects Manager</h3>
                 <div class="admin-form-actions">
                   <button id="projects-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="projects-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="projects-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="projects-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -307,10 +312,10 @@
           <article class="card border-0 shadow-sm admin-module-card mb-4">
             <div class="card-body">
               <div class="admin-module-header">
-                <h3 class="h5 mb-1">Knowledge Manager</h3>
+                <h3 class="h5 mb-1">Articles / Knowledge Manager</h3>
                 <div class="admin-form-actions">
                   <button id="knowledge-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="knowledge-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="knowledge-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="knowledge-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -409,7 +414,7 @@
                 <h3 class="h5 mb-1">Ventures Manager</h3>
                 <div class="admin-form-actions">
                   <button id="ventures-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="ventures-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="ventures-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="ventures-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -467,15 +472,76 @@
         </div>
       </section>
 
+      <section id="module-spotify" class="section pt-0">
+        <div class="container-fluid">
+          <article class="card border-0 shadow-sm admin-module-card mb-4">
+            <div class="card-body">
+              <div class="admin-module-header">
+                <h3 class="h5 mb-1">Spotify Owner Integration</h3>
+                <div class="admin-form-actions">
+                  <button id="spotify-admin-connect-btn" type="button" class="btn btn-primary btn-sm">Connect</button>
+                  <button id="spotify-admin-refresh-btn" type="button" class="btn btn-outline-primary btn-sm">Refresh</button>
+                  <button id="spotify-admin-disconnect-btn" type="button" class="btn btn-outline-secondary btn-sm">Disconnect</button>
+                </div>
+              </div>
+              <div id="spotify-admin-status" class="alert py-2 px-3 mb-3 admin-module-status alert-secondary">
+                Checking Spotify backend status...
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <h4 class="h6 mb-3">Connection</h4>
+                    <dl class="row mb-0">
+                      <dt class="col-sm-5">Configured</dt>
+                      <dd class="col-sm-7" id="spotify-admin-configured">-</dd>
+                      <dt class="col-sm-5">Connected</dt>
+                      <dd class="col-sm-7" id="spotify-admin-connected">-</dd>
+                      <dt class="col-sm-5">Owner</dt>
+                      <dd class="col-sm-7" id="spotify-admin-owner">-</dd>
+                      <dt class="col-sm-5">Token Expires</dt>
+                      <dd class="col-sm-7" id="spotify-admin-token-expiry">-</dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <h4 class="h6 mb-3">OAuth Redirect URI</h4>
+                    <p class="mb-2">
+                      Active Redirect:
+                      <code id="spotify-admin-redirect-uri">-</code>
+                    </p>
+                    <p class="mb-1">Allow List (exact match):</p>
+                    <ul id="spotify-admin-allow-list" class="mb-0 small"></ul>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <h4 class="h6 mb-2">Currently Playing</h4>
+                    <p class="mb-0 small" id="spotify-admin-current-track">-</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <h4 class="h6 mb-2">Recently Played</h4>
+                    <p class="mb-0 small" id="spotify-admin-recent-track">-</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="module-kom-config" class="section pt-0 pb-4">
         <div class="container-fluid">
           <article class="card border-0 shadow-sm admin-module-card mb-4">
             <div class="card-body">
               <div class="admin-module-header">
-                <h3 class="h5 mb-1">KOM Config Editor</h3>
+                <h3 class="h5 mb-1">KOM Config Settings Editor</h3>
                 <div class="admin-form-actions">
                   <button id="kom-config-save-btn" type="button" class="btn btn-primary btn-sm">Save</button>
-                  <button id="kom-config-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                  <button id="kom-config-reset-btn" type="button" class="btn btn-outline-secondary btn-sm">Reset dari Template</button>
                 </div>
               </div>
               <div id="kom-config-status" class="alert py-2 px-3 mb-3 admin-module-status" hidden></div>
@@ -503,8 +569,10 @@
 
   <!-- Admin JS -->
   <script src="assets/js/storage-adapter.js"></script>
-  <script src="assets/js/admin-auth.js"></script>
+  <script src="assets/js/admin-auth.js?v=20260310-1"></script>
   <script src="assets/js/admin-panel.js"></script>
+  <script src="assets/js/spotify-adapter.js?v=20260311-spotify-sync"></script>
+  <script src="assets/js/spotify-admin.js?v=20260311-spotify-sync"></script>
 </body>
 
 </html>

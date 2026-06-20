@@ -1,13 +1,13 @@
 ﻿{
     "id":  "homepage-main",
     "hero":  {
-                 "title":  "Search-First Personal Knowledge Website",
-                 "subtitle":  "Website personal profesional dengan fondasi systems thinking dan KOM expansion.",
+                 "title":  "Engineering Portfolio & Living Knowledge Archive",
+                 "subtitle":  "Electrical Engineer building real end-to-end systems — from power electronics and embedded hardware to IoT dashboards, web monitoring, and VPS infrastructure.",
                  "typed_items":  [
+                                     "Power Electronics",
                                      "Embedded Systems",
-                                     "Product Development",
-                                     "Knowledge Systems",
-                                     "Software Architecture"
+                                     "Electric Vehicles",
+                                     "IoT & Web Monitoring"
                                  ]
              },
     "sections":  [
